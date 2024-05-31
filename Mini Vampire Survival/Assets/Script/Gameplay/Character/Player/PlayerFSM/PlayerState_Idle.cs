@@ -9,8 +9,15 @@ namespace Mini_Vampire_Surviours.Gameplay.Player
         
         public override void Enter()
         {
-            fsm.player.animator.ResetAnimator();
-            fsm.player.animator.Play(AnimNameEnum.Idle.ToString(), 0, 0);
+            fsm.animator.ResetAnimator();
+            fsm.animator.Play(AnimNameEnum.Locomotion.ToString(), 0, 0);
+            fsm.player.FlipSpirtes(false);
+            Invoke(nameof(Invoke_ChangeStateToSurvive), 1);            
+        }
+
+        void Invoke_ChangeStateToSurvive()
+        {
+            fsm.ChangeState(PlayerStateEnum.surviving);
         }
 
         public override void Exit()

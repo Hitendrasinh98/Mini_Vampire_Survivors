@@ -7,8 +7,8 @@ namespace Mini_Vampire_Surviours.Gameplay.Core
     public abstract class Base_FSM<TFSM, TEnum> : MonoBehaviour where TFSM : Base_FSM<TFSM, TEnum> where TEnum : System.Enum
     {
         [SerializeField] List<State<TFSM, TEnum>> availableStates = new List<State<TFSM, TEnum>>();
-        [SerializeField] State<TFSM, TEnum> activeState;
-
+        [SerializeField] protected State<TFSM, TEnum> activeState;
+        [SerializeField] protected TEnum currentStateEnum;
 
         protected virtual void Awake()
         {
@@ -19,7 +19,7 @@ namespace Mini_Vampire_Surviours.Gameplay.Core
         }
 
 
-        public void ChangeState(TEnum changeStateToEnum)
+        public virtual void ChangeState(TEnum changeStateToEnum)
         {
             if (activeState != null && activeState.StateEnum.Equals(changeStateToEnum))
             {
@@ -29,6 +29,9 @@ namespace Mini_Vampire_Surviours.Gameplay.Core
             activeState?.Exit();
             activeState = availableStates.Find(state => state.StateEnum.Equals(changeStateToEnum));
             activeState?.Enter();
+            currentStateEnum = activeState.StateEnum;
         }
+
+        
     }
 }
