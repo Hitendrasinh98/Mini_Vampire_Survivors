@@ -13,22 +13,29 @@ namespace Mini_Vampire_Surviours.Gameplay.Player
     {
         static readonly string ChannelKey = "[PlayerFsM] ";  //will be used to fillter logs 
         [field: SerializeField,Space(10)] public Player player { get; private set; }
+        [field: SerializeField] public Health m_Health { get; private set; }
+        [field: SerializeField] public Movement m_Movement { get; private set; }
+        
+        [Space(20)]
+        [SerializeField] int MaxHealth;
+        [SerializeField] public float MoveSpeed;
+        [SerializeField] float MaxLocomotionBlendAmount;
+
 
         public Animator animator { get { return player?.animator; } }
 
         protected override void Awake()
         {
             base.Awake();
-            player.Init();
+            Initialize();
             ChangeState(PlayerStateEnum.Idle);
         }
-
-
+        
         private void Update()
         {
             if (currentStateEnum == PlayerStateEnum.None)
                 return;
-            activeState?.GameUpdate();
+            activeState.GameUpdate();
         }
 
 
@@ -36,7 +43,7 @@ namespace Mini_Vampire_Surviours.Gameplay.Player
         {
             if (currentStateEnum == PlayerStateEnum.None)
                 return;
-            activeState?.GameFixedUpdate();
+            activeState.GameFixedUpdate();
         }
 
 
@@ -44,7 +51,15 @@ namespace Mini_Vampire_Surviours.Gameplay.Player
         {
             if (currentStateEnum == PlayerStateEnum.None)
                 return;
-            activeState?.GameLateUpdate();
+            activeState.GameLateUpdate();
+        }
+
+
+        void Initialize()
+        {
+            player.Init();
+            m_Health.Init(MaxHealth);
+            m_Movement.Init(player.transform,MoveSpeed, AnimatorParameterKeyEnum.MoveSpeed.ToString(), MaxLocomotionBlendAmount);
         }
 
     }

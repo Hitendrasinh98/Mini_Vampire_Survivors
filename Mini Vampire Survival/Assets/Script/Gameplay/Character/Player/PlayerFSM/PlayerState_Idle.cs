@@ -11,7 +11,7 @@ namespace Mini_Vampire_Surviours.Gameplay.Player
         {
             fsm.animator.ResetAnimator();
             fsm.animator.Play(AnimNameEnum.Locomotion.ToString(), 0, 0);
-            fsm.player.FlipSpirtes(false);
+            fsm.m_Movement.Set_FaceFlipped(false);
             Invoke(nameof(Invoke_ChangeStateToSurvive), 1);            
         }
 

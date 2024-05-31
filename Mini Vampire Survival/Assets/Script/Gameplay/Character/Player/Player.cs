@@ -29,18 +29,6 @@ namespace Mini_Vampire_Surviours.Gameplay.Player
         {
             OnCollide?.Invoke(collision);
         }
-
-        /// <summary>
-        /// Use this to flip the Player character
-        /// </summary>
-        /// <param name="isFliped"></param>
-        public void FlipSpirtes(bool isFliped)
-        {
-            localScale.x = isFliped ? -localScale.x : Mathf.Abs( localScale.x);
-            transform.localScale = localScale;
-        }    
-
-
     }
 
 }
