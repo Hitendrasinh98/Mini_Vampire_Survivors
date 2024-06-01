@@ -1,10 +1,11 @@
+using Mini_Vampire_Surviours.Gameplay.Core;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Mini_Vampire_Surviours.Gameplay.Player
+namespace Mini_Vampire_Surviours.Gameplay.PlayerSystem
 { 
-    public class Player : MonoBehaviour
+    public class Player : MonoBehaviour, IDamagable
     {
         [field: SerializeField] public Animator animator { get; private set; }
 

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Mini_Vampire_Surviours.Gameplay.Player
+namespace Mini_Vampire_Surviours.Gameplay.PlayerSystem
 {
     public enum PlayerStateEnum { None ,Idle ,surviving ,Died };
     public enum AnimatorParameterKeyEnum { MoveSpeed ,AttackIndex ,OnAttack ,OnHit ,IsDied};

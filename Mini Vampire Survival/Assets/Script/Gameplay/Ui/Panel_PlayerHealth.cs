@@ -45,15 +45,9 @@ namespace Mini_Vampire_Surviours.Gameplay.UI
         {
             float normalizeValue = Mathf.Clamp01(currentHealth / (float)maxHealth);
             fillbar_Health.fillAmount = normalizeValue;
-            txt_health.text = GetCurrentHealthText(normalizeValue,currentHealth) +"/"+ maxHealth.ToString();
+            txt_health.text = currentHealth.ToString() +"/"+ maxHealth.ToString();
         }
 
-        string GetCurrentHealthText(float normalizeValue, float currentHealth)
-        {
-            Color c = Color.Lerp(Color.red, Color.green, normalizeValue);
-            string hexColor = ColorUtility.ToHtmlStringRGB(c);
-            string currentHealthText = $"<color=#{hexColor}>{(int)currentHealth}</color>";
-            return currentHealthText;
-        }
+      
     }
 }

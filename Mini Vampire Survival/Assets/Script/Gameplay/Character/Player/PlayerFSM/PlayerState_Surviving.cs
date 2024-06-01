@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Mini_Vampire_Surviours.Gameplay.Player
+namespace Mini_Vampire_Surviours.Gameplay.PlayerSystem
 {
     public class PlayerState_Surviving : Core.State<PlayerFSM,PlayerStateEnum>
     {
