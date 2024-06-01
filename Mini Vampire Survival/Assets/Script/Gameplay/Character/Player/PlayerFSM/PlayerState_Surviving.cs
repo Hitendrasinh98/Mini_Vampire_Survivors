@@ -10,6 +10,7 @@ namespace Mini_Vampire_Surviours.Gameplay.Player
 
         public override void Enter()
         {
+            fsm.player.AddObserver_OnHit(PlayerTookDamage);
             fsm.m_Health.AddObserver_OnDied(OnDied);
         }
 
@@ -31,6 +32,15 @@ namespace Mini_Vampire_Surviours.Gameplay.Player
             fsm.m_Movement.Move(inputDirection);
         }
 
+
+        void PlayerTookDamage(float damageAmount)
+        {
+            fsm.m_Health.TakeDamage(damageAmount);
+            float remaingHealth = fsm.m_Health.remainingHealth;
+            int maxHealth = fsm.m_Health.maxHealth;
+            fsm.animator.TrigerAnimation(AnimatorParameterKeyEnum.OnHit);
+            Core.EventManager.Instance.OnPlayerGotHit?.Invoke(damageAmount, remaingHealth,maxHealth);
+        }
 
         void OnDied()
         {

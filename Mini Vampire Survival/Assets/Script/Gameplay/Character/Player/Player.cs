@@ -7,27 +7,28 @@ namespace Mini_Vampire_Surviours.Gameplay.Player
     public class Player : MonoBehaviour
     {
         [field: SerializeField] public Animator animator { get; private set; }
-        
 
 
-        Vector3 localScale = new Vector3(1, 1, 1);
 
-        System.Action<Collision2D> OnCollide;
-        public void AddObserver_OnCollide(System.Action<Collision2D> callback) => OnCollide += callback;
-        public void RemoveObserver_OnCollide(System.Action<Collision2D> callback) => OnCollide -= callback;
+        System.Action<float> OnTookDamage; //TookDamage
+        public void AddObserver_OnHit(System.Action<float> callback) => OnTookDamage += callback;
+        public void RemoveObserver_OnHit(System.Action<float> callback) => OnTookDamage -= callback;
 
 
 
 
 
+        /// <summary>
+        /// Use this to initialize sometjing specifically for this player
+        /// </summary>
         public void Init()
         {
-            localScale = transform.localScale;
+
         }
 
-        public void OnCollisionEnter2D(Collision2D collision)
+        public void TakeDamage(float damageAmount)
         {
-            OnCollide?.Invoke(collision);
+            OnTookDamage?.Invoke(damageAmount);
         }
     }
 

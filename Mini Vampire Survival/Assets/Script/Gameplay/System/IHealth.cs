@@ -7,8 +7,8 @@ namespace Mini_Vampire_Surviours.Gameplay.Core
     public interface IHealth
     {
         void Init(int maxHealth);
-        void TakeDamage(int amount);
-        void Heal(int amount);
+        void TakeDamage(float amount);
+        void Heal(float amount);
         bool IsAlive { get; }
     }
 }
