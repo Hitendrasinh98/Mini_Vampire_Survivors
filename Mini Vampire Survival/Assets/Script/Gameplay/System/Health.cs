@@ -30,6 +30,7 @@ namespace Mini_Vampire_Surviours.Gameplay.Core
             currentHealth -= amount;
             if (currentHealth <= 0)
             {
+                currentHealth = 0;
                 Die();
             }
         }

@@ -16,9 +16,7 @@ namespace Mini_Vampire_Surviours.Gameplay.Player
         [field: SerializeField] public Health m_Health { get; private set; }
         [field: SerializeField] public Movement m_Movement { get; private set; }
         
-        [Space(20)]
-        [SerializeField] int MaxHealth;
-        [SerializeField] public float MoveSpeed;
+        [Space(20)]        
         [SerializeField] float MaxLocomotionBlendAmount;
 
 
@@ -27,10 +25,14 @@ namespace Mini_Vampire_Surviours.Gameplay.Player
         protected override void Awake()
         {
             base.Awake();
-            Initialize();
-            ChangeState(PlayerStateEnum.Idle);
+            EventManager.Instance.AddObserver_OnGameStart(OnGameStart);
         }
-        
+
+        private void OnDestroy()
+        {
+            EventManager.Instance.RemoveObserver_OnGameStart(OnGameStart);
+        }
+
         private void Update()
         {
             if (currentStateEnum == PlayerStateEnum.None)
@@ -55,11 +57,17 @@ namespace Mini_Vampire_Surviours.Gameplay.Player
         }
 
 
-        void Initialize()
+        void OnGameStart(EventManager.GameStartData gameStartData)
+        {
+            Initialize(gameStartData.MaxHealth, gameStartData.MoveSpeed);
+            ChangeState(PlayerStateEnum.Idle);
+        }
+
+        void Initialize(int maxHealth , float moveSpeed)
         {
             player.Init();
-            m_Health.Init(MaxHealth);
-            m_Movement.Init(player.transform,MoveSpeed, AnimatorParameterKeyEnum.MoveSpeed.ToString(), MaxLocomotionBlendAmount);
+            m_Health.Init(maxHealth);
+            m_Movement.Init(player.transform,moveSpeed, AnimatorParameterKeyEnum.MoveSpeed.ToString(), MaxLocomotionBlendAmount);
         }
 
     }

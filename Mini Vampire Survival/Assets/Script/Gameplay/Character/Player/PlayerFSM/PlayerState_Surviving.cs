@@ -10,12 +10,12 @@ namespace Mini_Vampire_Surviours.Gameplay.Player
 
         public override void Enter()
         {
-
+            fsm.m_Health.AddObserver_OnDied(OnDied);
         }
 
         public override void Exit()
         {
-
+            fsm.m_Health.RemoveObserver_OnDied(OnDied);
         }
 
         public override void GameUpdate()
@@ -31,6 +31,11 @@ namespace Mini_Vampire_Surviours.Gameplay.Player
             fsm.m_Movement.Move(inputDirection);
         }
 
+
+        void OnDied()
+        {
+            fsm.ChangeState(PlayerStateEnum.Died);
+        }
 
         
         [SerializeField] string debug_AnimName;

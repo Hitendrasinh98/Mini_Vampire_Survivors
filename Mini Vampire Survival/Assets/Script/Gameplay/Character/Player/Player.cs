@@ -10,9 +10,9 @@ namespace Mini_Vampire_Surviours.Gameplay.Player
         
 
 
-        System.Action<Collision2D> OnCollide;
         Vector3 localScale = new Vector3(1, 1, 1);
 
+        System.Action<Collision2D> OnCollide;
         public void AddObserver_OnCollide(System.Action<Collision2D> callback) => OnCollide += callback;
         public void RemoveObserver_OnCollide(System.Action<Collision2D> callback) => OnCollide -= callback;
 

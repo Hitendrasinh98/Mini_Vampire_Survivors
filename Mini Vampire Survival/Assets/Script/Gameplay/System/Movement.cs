@@ -14,12 +14,12 @@ namespace Mini_Vampire_Surviours.Gameplay.Core
         [SerializeField] string locoMotionBlendTreeKey;
         [SerializeField] float maxBlendAmount;
 
-        bool isFlipped;
 
         Animator animator;
-        Vector3 initialScale;
+        bool isFlipped;
         float targetBlendAmount;
         float currentBlendAmount;
+        Vector3 initialScale;
 
         public void Init(Transform target, float moveSpeed, string locoMotionBlendTreeKey, float maxBlendAmount)
         {
@@ -65,7 +65,6 @@ namespace Mini_Vampire_Surviours.Gameplay.Core
         {
             initialScale.x = isFliped ? -initialScale.x : Mathf.Abs(initialScale.x);
             target.localScale = initialScale;
-            print("IsFlipped : " + isFliped);
         }
     }
 }
