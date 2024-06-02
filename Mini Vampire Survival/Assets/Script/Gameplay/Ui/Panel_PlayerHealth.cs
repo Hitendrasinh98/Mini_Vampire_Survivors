@@ -9,7 +9,7 @@ namespace Mini_Vampire_Surviours.Gameplay.UI
 {
     public class Panel_PlayerHealth : MonoBehaviour
     {
-        [SerializeField] Image fillbar_Health;
+        [SerializeField] Slider slider_Health;
         [SerializeField] TextMeshProUGUI txt_health;
 
 
@@ -44,7 +44,7 @@ namespace Mini_Vampire_Surviours.Gameplay.UI
         void Update_HelathUI( float currentHealth ,int maxHealth)
         {
             float normalizeValue = Mathf.Clamp01(currentHealth / (float)maxHealth);
-            fillbar_Health.fillAmount = normalizeValue;
+            slider_Health.value = normalizeValue;
             txt_health.text = currentHealth.ToString() +"/"+ maxHealth.ToString();
         }
 
