@@ -8,6 +8,7 @@ namespace Mini_Vampire_Surviours.Gameplay.WeaponSystem
     public class WeaponManager : MonoBehaviour
     {
         [SerializeField] ConfigData.So_WeaponConfig so_WeaponConfig;
+        [SerializeField] Cinemachine.CinemachineCollisionImpulseSource impulseSource;
 
         [Header("Current Progress")]
         [SerializeField] bool isActive;
@@ -98,6 +99,7 @@ namespace Mini_Vampire_Surviours.Gameplay.WeaponSystem
             }
             GameObject weapon = Instantiate(targetWeapon, primaryWeaponSlot.position, primaryWeaponSlot.rotation, primaryWeaponSlot);
             primaryWeapon = weapon.GetComponent<IWeapon>();
+            weapon.GetComponent<BaseWeapon>().Set_ImpulseSource(impulseSource);
         }
     }
 }

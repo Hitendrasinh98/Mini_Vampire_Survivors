@@ -15,6 +15,8 @@ namespace Mini_Vampire_Surviours.Gameplay.WeaponSystem
         [SerializeField] float radiusIncrement = 0.5f; // Increment for each radius expansion step
         [SerializeField] LayerMask enemyLayer; // Layer on which enemies are placed
 
+
+        protected Cinemachine.CinemachineCollisionImpulseSource impulseSource;
         private float timer;
         public WeaponTypeEnum weaponType => weaponTypeEnum;
         public float FireRate => fireRate;
@@ -64,6 +66,11 @@ namespace Mini_Vampire_Surviours.Gameplay.WeaponSystem
         public void PowerUp_PrimaryWeaponDamage(float damage)
         {
             this.damage += damage;
+        }
+
+        public void Set_ImpulseSource(Cinemachine.CinemachineCollisionImpulseSource impulseSource)
+        {
+            this.impulseSource = impulseSource;
         }
     }
 }

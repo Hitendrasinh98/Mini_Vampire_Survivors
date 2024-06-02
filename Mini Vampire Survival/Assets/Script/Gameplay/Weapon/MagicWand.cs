@@ -7,6 +7,7 @@ namespace Mini_Vampire_Surviours.Gameplay.WeaponSystem
     public class MagicWand : BaseWeapon
     {
         [Header("MagicWand Weapon Config")]
+
         [SerializeField] GameObject projectilePrefab;
         [SerializeField] Transform firePoint;
         [SerializeField] float bulletSpeed;
@@ -26,6 +27,8 @@ namespace Mini_Vampire_Surviours.Gameplay.WeaponSystem
             Projectile proj = projectile.GetComponent<Projectile>();
             targetDirection = target.position - firePoint.position;
             proj.Init(damage, range , bulletSpeed,targetDirection);
+            Vector2 velocity = new Vector2(Random.Range(-.15f, .15f), Random.Range(-.15f, .15f));
+            impulseSource.GenerateImpulse(velocity);
         }
 
 

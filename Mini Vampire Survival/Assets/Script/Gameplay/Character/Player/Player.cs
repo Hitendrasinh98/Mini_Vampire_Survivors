@@ -7,6 +7,8 @@ namespace Mini_Vampire_Surviours.Gameplay.PlayerSystem
 { 
     public class Player : MonoBehaviour, IDamagable
     {
+        [SerializeField] Cinemachine.CinemachineImpulseSource impulseSource; // Reference to the Cinemachine Impulse Source
+
         [field: SerializeField] public Animator animator { get; private set; }
         [field: SerializeField] public Transform  PrimaryWeaponSlot { get; private set; }
         [field: SerializeField] public Transform SecondaryWeaponSlot { get; private set; }
@@ -33,6 +35,8 @@ namespace Mini_Vampire_Surviours.Gameplay.PlayerSystem
 
         public void TakeDamage(float damageAmount)
         {
+            Vector2 velocity = new Vector2(Random.Range(-.15f, .15f), Random.Range(-.15f, .15f));
+            impulseSource.GenerateImpulse(velocity);
             OnTookDamage?.Invoke(damageAmount);
         }
     }
