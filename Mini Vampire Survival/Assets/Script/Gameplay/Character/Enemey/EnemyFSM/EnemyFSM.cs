@@ -12,10 +12,14 @@ namespace Mini_Vampire_Surviours.Gameplay.EnemySystem
     {
         static readonly string ChannelKey = "[EnemyFSM] ";  //will be used to fillter logs 
         [field: SerializeField, Space(10)] public Enemy enemy { get; private set; }
+        [field: SerializeField] public LevelUpSystem.XPGemTypeEnum gemTypeEnum { get; private set; }
+
         [field: SerializeField] public Health m_Health { get; private set; }
         [field: SerializeField] public Movement m_Movement { get; private set; }
 
-        [Space(20)]        
+        [Space(20)]
+        [SerializeField] int maxHealth;
+        [SerializeField] float moveSpeed;
         [SerializeField] float MaxLocomotionBlendAmount;
         [field: SerializeField] public float AttackRange { get; private set; }
         [field: SerializeField] public float AttackRate { get; private set; }
@@ -68,7 +72,7 @@ namespace Mini_Vampire_Surviours.Gameplay.EnemySystem
 
         
 
-        public void ActivateSystem(Transform target ,int maxHealth, float moveSpeed )
+        public void ActivateSystem(Transform target )
         {
             Target = target; 
             enemy.Init();

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Mini_Vampire_Surviours.Gameplay.LevelUpSystem
 {
-    public enum XPGemTypeEnum {None, Enemy,LootBox ,Boss};
+    public enum XPGemTypeEnum {None, Zombie ,Bigger_Zombie ,Faster_Zombie ,LootBox ,Boss};
 
     public class XPLevelManager : MonoBehaviour
     {
@@ -55,10 +55,13 @@ namespace Mini_Vampire_Surviours.Gameplay.LevelUpSystem
             if (isMaxedOut)
                 return;
 
-            int spawnAmount = Get_XpGemSpawnData(xpGemType).spawnAmount;
+            GemSpawnConfig data = Get_XpGemSpawnData(xpGemType);
+            int spawnAmount = data.spawnAmount;
             for (int i = 0; i < spawnAmount; i++)
             {
-                XpGem gem = Instantiate(prefab_XpGem, spawnPos, Quaternion.identity);
+                Vector2 randomPos = Random.insideUnitCircle * data.spawnRadius;
+                Vector2 ramdomSpawnPos = new Vector3(spawnPos.x + randomPos.x, spawnPos.y + randomPos.y);
+                XpGem gem = Instantiate(prefab_XpGem, ramdomSpawnPos, Quaternion.identity);
                 gem.Init(xpGemType);
             }
         }
@@ -115,6 +118,7 @@ namespace Mini_Vampire_Surviours.Gameplay.LevelUpSystem
         public XPGemTypeEnum XpGemType;
         public int spawnAmount;
         public int gemAmountPerItem;
+        public float spawnRadius;
     }
 
 }
