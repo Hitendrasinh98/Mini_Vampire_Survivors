@@ -8,7 +8,7 @@ namespace Mini_Vampire_Surviours.Gameplay.EnemySystem
     public enum EnemyStateEnum { None, Idle, Chase, Attack ,Died };
     public enum AnimatorParameterKeyEnum { MoveSpeed, AttackIndex, OnAttack, OnHit, IsDied };
     public enum AnimNameEnum { Locomotion };
-    public class EnemyFSM : Base_FSM<EnemyFSM,EnemyStateEnum>
+    public class EnemyFSM : Base_FSM<EnemyFSM,EnemyStateEnum> , IEnemy
     {
         static readonly string ChannelKey = "[EnemyFSM] ";  //will be used to fillter logs 
         [field: SerializeField, Space(10)] public Enemy enemy { get; private set; }
@@ -75,10 +75,11 @@ namespace Mini_Vampire_Surviours.Gameplay.EnemySystem
         public void ActivateSystem(Transform target )
         {
             Target = target; 
-            enemy.Init();
             m_Health.Init(maxHealth);
             m_Movement.Init(enemy.transform, moveSpeed, AnimatorParameterKeyEnum.MoveSpeed.ToString(), MaxLocomotionBlendAmount);
             t_Enemy = enemy.transform;
+            t_Enemy.position = Vector2.zero;
+            t_Enemy.localPosition = Vector2.zero;
             playerDamagable = target.GetComponent<IDamagable>();
             if (playerDamagable == null)
                 Debug.LogError(ChannelKey + "We didnt get the damazable component on player");
@@ -104,6 +105,11 @@ namespace Mini_Vampire_Surviours.Gameplay.EnemySystem
         void OnDied()
         {
             ChangeState(EnemyStateEnum.Died);
+        }
+
+        public GameObject Get_GameObject()
+        {
+            return gameObject;
         }
     }
 }

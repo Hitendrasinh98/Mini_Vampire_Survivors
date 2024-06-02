@@ -13,9 +13,9 @@ namespace Mini_Vampire_Surviours.Gameplay.LevelUpSystem
         [SerializeField] List<GemSpawnConfig> xpGemTypeConfig = new List<GemSpawnConfig>();
 
         [Header("Current Progress")]
-        [SerializeField] int currentLevel;
         [SerializeField] int currentXPGems;
         [SerializeField] int requiredXpGems;
+        [field: SerializeField] public int currentLevel { get; private set; }
         [field: SerializeField] public bool isMaxedOut { get; private set; }
 
         
@@ -35,7 +35,7 @@ namespace Mini_Vampire_Surviours.Gameplay.LevelUpSystem
         {
             currentLevel = gameStartData.XPLevel;
             Set_NextXpLevel();
-            Core.EventManager.Instance.OnXPGemCollect?.Invoke(currentXPGems, requiredXpGems, currentLevel);
+            Core.EventManager.Instance.OnXPGemCollect?.Invoke(currentXPGems, requiredXpGems);
         }
 
         void Set_NextXpLevel()
@@ -74,7 +74,7 @@ namespace Mini_Vampire_Surviours.Gameplay.LevelUpSystem
 
             int gemAmount = Get_XpGemSpawnData(xPGemType).gemAmountPerItem;            
             currentXPGems += gemAmount;
-            Core.EventManager.Instance.OnXPGemCollect?.Invoke(currentXPGems, requiredXpGems,currentLevel);
+            Core.EventManager.Instance.OnXPGemCollect?.Invoke(currentXPGems, requiredXpGems);
             CheckForLevelUp();
         }
 
@@ -86,6 +86,7 @@ namespace Mini_Vampire_Surviours.Gameplay.LevelUpSystem
                 currentXPGems -= requiredXpGems;
                 //Show Popup
                 Set_NextXpLevel();
+                Core.EventManager.Instance.OnXpLevelUP?.Invoke(currentLevel);
             }
         }
 

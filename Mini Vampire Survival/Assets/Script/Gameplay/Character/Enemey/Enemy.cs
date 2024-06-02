@@ -16,17 +16,6 @@ namespace Mini_Vampire_Surviours.Gameplay.EnemySystem
         public void RemoveObserver_OnHit(System.Action<float> callback) => OnTookDamage -= callback;
 
 
-
-
-
-        /// <summary>
-        /// Use this to initialize sometjing specifically for this player
-        /// </summary>
-        public void Init()
-        {
-
-        }
-
         public void TakeDamage(float damageAmount)
         {
             OnTookDamage?.Invoke(damageAmount);

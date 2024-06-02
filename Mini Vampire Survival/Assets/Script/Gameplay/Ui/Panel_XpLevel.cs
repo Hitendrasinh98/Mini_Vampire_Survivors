@@ -14,24 +14,37 @@ namespace Mini_Vampire_Surviours.Gameplay.UI
 
         private void Awake()
         {
+            EventManager.Instance.AddObserver_OnGameStart(OnGameStart);
             EventManager.Instance.AddObserver_OnXPGemCollect(OnXpGemCollect);
+            EventManager.Instance.AddObserver_OnXpLevelUP(OnXpLevelUp);
         }
 
         private void OnDestroy()
         {
+            EventManager.Instance.RemoveObserver_OnGameStart(OnGameStart);
             EventManager.Instance.RemoveObserver_OnXPGemCollect(OnXpGemCollect);
+            EventManager.Instance.RemoveObserver_OnXpLevelUP(OnXpLevelUp);
         }
 
 
-        void OnXpGemCollect( int currentXpGems , int requirementGems , int currentLevel)
+        void OnGameStart(EventManager.GameStartData gameStartData)
+        {
+            OnXpLevelUp(gameStartData.XPLevel);
+        }
+
+        void OnXpLevelUp(int currentLevel)
+        {
+            txt_health.text = "Lvl " + (currentLevel + 1).ToString();
+        }
+
+        void OnXpGemCollect( int currentXpGems , int requirementGems )
         {
             Update_XpLevelUI(currentXpGems, requirementGems);
-            txt_health.text ="Lvl "+ (currentLevel+1).ToString();
         }
 
 
         /// <summary>
-        /// Will used to update fillbar and text for player health
+        /// Will used to update fillbar and text for player XpLevel
         /// </summary>
         /// <param name="currentHealth"></param>
         /// <param name="maxHealth"></param>
