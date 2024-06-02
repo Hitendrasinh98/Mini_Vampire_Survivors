@@ -40,6 +40,7 @@ namespace Mini_Vampire_Surviours.Gameplay
 
         public void OnPlayerDied()
         {
+            StatesSystem.StatesManager.Instance.Set_ResultStatus(false);
             Core.EventManager.Instance.OnGameComeplete?.Invoke();
             UISystem.UIManager.Instance.HidePage(UISystem.UIPageIDEnum.GameHud);
             UISystem.UIManager.Instance.ShowPage(UISystem.UIPageIDEnum.Result);
@@ -49,6 +50,7 @@ namespace Mini_Vampire_Surviours.Gameplay
         {
             if(totalSeconds >= soPlayerConfig.targetSurviveTime)
             {
+                StatesSystem.StatesManager.Instance.Set_ResultStatus( true);
                 Core.EventManager.Instance.OnGameComeplete?.Invoke();
                 UISystem.UIManager.Instance.HidePage(UISystem.UIPageIDEnum.GameHud);
                 UISystem.UIManager.Instance.ShowPage(UISystem.UIPageIDEnum.Result);

@@ -35,7 +35,7 @@ namespace Mini_Vampire_Surviours.Gameplay.PlayerSystem
 
         public void TakeDamage(float damageAmount)
         {
-            Vector2 velocity = new Vector2(Random.Range(-.15f, .15f), Random.Range(-.15f, .15f));
+            Vector2 velocity = new Vector2(Random.Range(-.05f, .05f), Random.Range(-.05f, .05f));
             impulseSource.GenerateImpulse(velocity);
             OnTookDamage?.Invoke(damageAmount);
         }

@@ -76,7 +76,7 @@ namespace Mini_Vampire_Surviours.Gameplay.StatesSystem
 
         public void Set_ResultStatus(bool isWon)
         {
-            this.IsWon = IsWon;                
+            this.IsWon = isWon;                
         }
 
     }
