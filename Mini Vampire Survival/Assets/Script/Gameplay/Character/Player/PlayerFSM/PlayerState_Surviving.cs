@@ -10,6 +10,7 @@ namespace Mini_Vampire_Surviours.Gameplay.PlayerSystem
 
         public override void Enter()
         {
+            fsm.animator.SetAnimatorFloatKey(AnimatorParameterKeyEnum.MoveSpeed, 0);
             fsm.player.AddObserver_OnHit(PlayerTookDamage);
             fsm.m_Health.AddObserver_OnDied(OnDied);
         }
@@ -17,6 +18,7 @@ namespace Mini_Vampire_Surviours.Gameplay.PlayerSystem
         public override void Exit()
         {
             fsm.m_Health.RemoveObserver_OnDied(OnDied);
+            fsm.animator.SetAnimatorFloatKey(AnimatorParameterKeyEnum.MoveSpeed, 0);
         }
 
         public override void GameUpdate()

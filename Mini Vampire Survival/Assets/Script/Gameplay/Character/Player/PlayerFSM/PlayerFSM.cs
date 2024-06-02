@@ -68,6 +68,7 @@ namespace Mini_Vampire_Surviours.Gameplay.PlayerSystem
             player.Init();
             m_Health.Init(maxHealth);
             m_Movement.Init(player.transform,moveSpeed, AnimatorParameterKeyEnum.MoveSpeed.ToString(), MaxLocomotionBlendAmount);
+            Debug.Log(ChannelKey + "Player FSM Started");
         }
 
     }
