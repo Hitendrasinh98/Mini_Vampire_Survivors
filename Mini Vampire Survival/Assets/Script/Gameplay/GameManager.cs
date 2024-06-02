@@ -6,11 +6,7 @@ namespace Mini_Vampire_Surviours.Gameplay
 {
     public class GameManager : MonoBehaviour
     {
-        [SerializeField] int PlayerMaxHealth = 100;
-        [SerializeField] int StartXpLevel = 1;
-        [SerializeField] float MoveSpeed = 7;
-        [SerializeField] int targetSurviveTime = 300; //InSeconds
-        [SerializeField] WeaponSystem.WeaponTypeEnum primaryWeapon;
+        [SerializeField] ConfigData.SO_PlayerConfig soPlayerConfig;
 
 
         private void Awake()
@@ -27,10 +23,10 @@ namespace Mini_Vampire_Surviours.Gameplay
         void StartGame()
         {
             Core.EventManager.GameStartData gameStartData = new Core.EventManager.GameStartData();
-            gameStartData.MaxHealth = PlayerMaxHealth;
-            gameStartData.XPLevel = StartXpLevel;
-            gameStartData.MoveSpeed = MoveSpeed;
-            gameStartData.primaryWeapon = primaryWeapon;
+            gameStartData.MaxHealth = soPlayerConfig.PlayerMaxHealth;
+            gameStartData.XPLevel = soPlayerConfig.StartXpLevel;
+            gameStartData.MoveSpeed = soPlayerConfig.MoveSpeed;
+            gameStartData.primaryWeapon = soPlayerConfig.primaryWeapon;
 
             UISystem.UIManager.Instance.ShowPage(UISystem.UIPageIDEnum.GameHud);
             Core.EventManager.Instance.OnGameStart?.Invoke(gameStartData);
@@ -51,7 +47,7 @@ namespace Mini_Vampire_Surviours.Gameplay
 
         void OnSurvieTimeIncrease(int totalSeconds)
         {
-            if(totalSeconds >= targetSurviveTime)
+            if(totalSeconds >= soPlayerConfig.targetSurviveTime)
             {
                 Core.EventManager.Instance.OnGameComeplete?.Invoke();
                 UISystem.UIManager.Instance.HidePage(UISystem.UIPageIDEnum.GameHud);

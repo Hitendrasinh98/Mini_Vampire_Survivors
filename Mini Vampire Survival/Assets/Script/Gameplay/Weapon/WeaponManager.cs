@@ -7,12 +7,12 @@ namespace Mini_Vampire_Surviours.Gameplay.WeaponSystem
     public enum WeaponTypeEnum { None ,MagicWand ,FireArm};
     public class WeaponManager : MonoBehaviour
     {
-        PlayerSystem.Player player;
-        [SerializeField] List<BaseWeapon> availableWeapons = new List<BaseWeapon>();
+        [SerializeField] ConfigData.So_WeaponConfig so_WeaponConfig;
 
         [Header("Current Progress")]
         [SerializeField] bool isActive;
 
+        PlayerSystem.Player player;
         private IWeapon primaryWeapon;
         private List<IWeapon> secondaryWeapons = new List<IWeapon>();
 
@@ -42,13 +42,13 @@ namespace Mini_Vampire_Surviours.Gameplay.WeaponSystem
             DeActivateSystem();
         }
 
-        void OnPowerSelect(LevelUpSystem.LevelUPPowerEnum powerUpType, float amount)
+        void OnPowerSelect(ConfigData.LevelUPPowerEnum powerUpType, float amount)
         {
-            if (powerUpType == LevelUpSystem.LevelUPPowerEnum.FireRate)
+            if (powerUpType == ConfigData.LevelUPPowerEnum.FireRate)
             {
                 primaryWeapon?.PowerUp_FireRate(amount);
             }
-            else if (powerUpType == LevelUpSystem.LevelUPPowerEnum.Damage)
+            else if (powerUpType == ConfigData.LevelUPPowerEnum.Damage)
             {
                 primaryWeapon?.PowerUp_PrimaryWeaponDamage(amount);
             }
@@ -88,12 +88,12 @@ namespace Mini_Vampire_Surviours.Gameplay.WeaponSystem
                 Destroy(primaryWeaponSlot.GetChild(0).gameObject);
             }
 
-            GameObject targetWeapon = availableWeapons[0].gameObject; 
-            for (int i = 0; i < availableWeapons.Count; i++)
+            GameObject targetWeapon = so_WeaponConfig.availableWeapons[0].gameObject; 
+            for (int i = 0; i < so_WeaponConfig.availableWeapons.Count; i++)
             {
-                if (availableWeapons[i].weaponType == weaponType)
+                if (so_WeaponConfig.availableWeapons[i].weaponType == weaponType)
                 {
-                    targetWeapon = availableWeapons[i].gameObject;
+                    targetWeapon = so_WeaponConfig.availableWeapons[i].gameObject;
                 }
             }
             GameObject weapon = Instantiate(targetWeapon, primaryWeaponSlot.position, primaryWeaponSlot.rotation, primaryWeaponSlot);

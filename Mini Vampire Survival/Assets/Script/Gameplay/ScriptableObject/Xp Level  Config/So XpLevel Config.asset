@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efbac57af58e2894ba32b4d907da4400, type: 3}
+  m_Name: So XpLevel Config
+  m_EditorClassIdentifier: 
+  <levelConfigs>k__BackingField:
+  - level: 1
+    xpGemsRequired: 30
+  - level: 2
+    xpGemsRequired: 60
+  - level: 3
+    xpGemsRequired: 60
+  - level: 4
+    xpGemsRequired: 90
+  - level: 5
+    xpGemsRequired: 90
+  - level: 6
+    xpGemsRequired: 90
+  - level: 7
+    xpGemsRequired: 150
+  - level: 8
+    xpGemsRequired: 150
+  - level: 9
+    xpGemsRequired: 150
+  - level: 10
+    xpGemsRequired: 150
+  <xpGemTypeConfig>k__BackingField:
+  - XpGemType: 1
+    spawnAmount: 1
+    gemAmountPerItem: 10
+    spawnRadius: 0
+  - XpGemType: 3
+    spawnAmount: 1
+    gemAmountPerItem: 5
+    spawnRadius: 0
+  - XpGemType: 2
+    spawnAmount: 5
+    gemAmountPerItem: 10
+    spawnRadius: 2
+  <levelUpPowerConfig>k__BackingField:
+  - powerType: 1
+    amount: 25
+    discription: Increase Max Health with 25
+  - powerType: 2
+    amount: 0.2
+    discription: reduce Primary weapon Firerate with 0.2
+  - powerType: 3
+    amount: 10
+    discription: Increase Primary weapon  Damage with 10

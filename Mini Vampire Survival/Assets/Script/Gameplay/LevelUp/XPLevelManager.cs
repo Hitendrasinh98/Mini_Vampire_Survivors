@@ -1,17 +1,16 @@
+using Mini_Vampire_Surviours.Gameplay.ConfigData;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Mini_Vampire_Surviours.Gameplay.LevelUpSystem
 {
-    public enum XPGemTypeEnum {None, Zombie ,Bigger_Zombie ,Faster_Zombie ,LootBox ,Boss};
 
     public class XPLevelManager : MonoBehaviour
     {
+        [SerializeField] ConfigData.So_XpLevelConfig so_XpLevelConfig;
         [SerializeField] XpGem prefab_XpGem;
-        [SerializeField] List<LevelConfig> levelConfigs = new List<LevelConfig>();
-        [SerializeField] List<GemSpawnConfig> xpGemTypeConfig = new List<GemSpawnConfig>();
-        [SerializeField] List<LevelUpPower> levelUpPowerConfig = new List<LevelUpPower>();
+       
 
         [Header("Current Progress")]
         [SerializeField] int currentXPGems;
@@ -41,8 +40,8 @@ namespace Mini_Vampire_Surviours.Gameplay.LevelUpSystem
 
         void Set_NextXpLevel()
         {
-            if (currentLevel + 1 < levelConfigs.Count)
-                requiredXpGems = levelConfigs[currentLevel + 1].xpGemsRequired;
+            if (currentLevel + 1 < so_XpLevelConfig.levelConfigs.Count)
+                requiredXpGems = so_XpLevelConfig.levelConfigs[currentLevel + 1].xpGemsRequired;
             else
             {
                 isMaxedOut = true;
@@ -100,7 +99,7 @@ namespace Mini_Vampire_Surviours.Gameplay.LevelUpSystem
                 return;
             }
 
-            panel_LevelUp.Set_UI(levelUpPowerConfig);
+            panel_LevelUp.Set_UI(so_XpLevelConfig.levelUpPowerConfig);
             UISystem.UIManager.Instance.ShowPage(UISystem.UIPageIDEnum.LevelUp);
             Time.timeScale = 0;
 
@@ -109,43 +108,20 @@ namespace Mini_Vampire_Surviours.Gameplay.LevelUpSystem
 
         GemSpawnConfig Get_XpGemSpawnData(XPGemTypeEnum xPGemType)
         {
-            for (int i = 0; i < xpGemTypeConfig.Count; i++)
+            for (int i = 0; i < so_XpLevelConfig.xpGemTypeConfig.Count; i++)
             {
-                if (xpGemTypeConfig[i].XpGemType == xPGemType)
+                if (so_XpLevelConfig.xpGemTypeConfig[i].XpGemType == xPGemType)
                 {
-                    return xpGemTypeConfig[i];
+                    return so_XpLevelConfig.xpGemTypeConfig[i];
                 }
             }
             Debug.LogError("Didnt  find the xpGem Config for " + xPGemType);
-            return xpGemTypeConfig[0];
+            return so_XpLevelConfig.xpGemTypeConfig[0];
         }
 
 
     }
 
-    [System.Serializable]
-    struct LevelConfig
-    {
-        public int level;
-        public int xpGemsRequired;
-    }
-
-    [System.Serializable]
-    struct GemSpawnConfig
-    {
-        public XPGemTypeEnum XpGemType;
-        public int spawnAmount;
-        public int gemAmountPerItem;
-        public float spawnRadius;
-    }
-
-    public enum LevelUPPowerEnum { none ,Health ,FireRate ,Damage };
-    [System.Serializable]
-    public struct LevelUpPower
-    {
-        public LevelUPPowerEnum powerType;
-        public float amount;
-        public string discription;
-    }
+    
 
 }

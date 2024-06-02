@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb9ea5b97e13ce94786f6b42c0ddaf3c, type: 3}
+  m_Name: So Spawn Config
+  m_EditorClassIdentifier: 
+  <avialableSpawnItem>k__BackingField:
+  - LevelRequired: 0
+    spawnRate: 3
+    prefab: {fileID: 8606585174173225609, guid: 128b879a160a01b4fb84de7b4d6a7199, type: 3}
+  - LevelRequired: 1
+    spawnRate: 5
+    prefab: {fileID: 9036676598197970747, guid: 92b54211c5979534ca04822c210c7102, type: 3}
+  - LevelRequired: 3
+    spawnRate: 10
+    prefab: {fileID: 7233535049646362388, guid: 5ff6fd8dfabc16c4fb447ad7b07154ff, type: 3}
+  <waveDataConfig>k__BackingField:
+  - minLevel: 0
+    maxLevel: 2
+    spawnMultipler: 1
+  - minLevel: 3
+    maxLevel: 6
+    spawnMultipler: 0.75
+  - minLevel: 7
+    maxLevel: 20
+    spawnMultipler: 0.5

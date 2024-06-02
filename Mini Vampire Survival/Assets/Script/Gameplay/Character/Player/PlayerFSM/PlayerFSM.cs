@@ -16,9 +16,6 @@ namespace Mini_Vampire_Surviours.Gameplay.PlayerSystem
         [field: SerializeField] public Health m_Health { get; private set; }
         [field: SerializeField] public Movement m_Movement { get; private set; }
         
-        [Space(20)]        
-        [SerializeField] float MaxLocomotionBlendAmount;
-
 
         public Animator animator { get { return player?.animator; } }
 
@@ -73,9 +70,9 @@ namespace Mini_Vampire_Surviours.Gameplay.PlayerSystem
         {
             ChangeState(PlayerStateEnum.None);
         }
-        void OnPowerSelect(LevelUpSystem.LevelUPPowerEnum powerUpType , float amount)
+        void OnPowerSelect(ConfigData.LevelUPPowerEnum powerUpType , float amount)
         {
-            if(powerUpType == LevelUpSystem.LevelUPPowerEnum.Health)
+            if(powerUpType == ConfigData.LevelUPPowerEnum.Health)
             {
                 m_Health.PowerHealth(amount);
                 float remaingHealth = m_Health.remainingHealth;
@@ -88,7 +85,7 @@ namespace Mini_Vampire_Surviours.Gameplay.PlayerSystem
         void Initialize(int maxHealth , float moveSpeed)
         {
             m_Health.Init(maxHealth);
-            m_Movement.Init(player.transform,moveSpeed, AnimatorParameterKeyEnum.MoveSpeed.ToString(), MaxLocomotionBlendAmount);
+            m_Movement.Init(player.transform,moveSpeed, AnimatorParameterKeyEnum.MoveSpeed.ToString());
             player.Init(m_Health);
             Debug.Log(ChannelKey + "Player FSM Started");
         }

@@ -6,10 +6,10 @@ namespace Mini_Vampire_Surviours.Gameplay.LevelUpSystem
 {
     public class XpGem : MonoBehaviour
     {
-        [SerializeField] XPGemTypeEnum xpGemType;
+        [SerializeField] ConfigData.XPGemTypeEnum xpGemType;
 
 
-        public void Init(XPGemTypeEnum xpGemType)
+        public void Init(ConfigData.XPGemTypeEnum xpGemType)
         {
             this.xpGemType = xpGemType; 
         }

@@ -10,20 +10,15 @@ namespace Mini_Vampire_Surviours.Gameplay.EnemySystem
     public enum AnimNameEnum { Locomotion };
     public class EnemyFSM : Base_FSM<EnemyFSM,EnemyStateEnum> , IEnemy
     {
-        static readonly string ChannelKey = "[EnemyFSM] ";  //will be used to fillter logs 
-        [field: SerializeField, Space(10)] public Enemy enemy { get; private set; }
-        [field: SerializeField] public LevelUpSystem.XPGemTypeEnum gemTypeEnum { get; private set; }
-
+        public readonly string ChannelKey = "[EnemyFSM] ";  //will be used to fillter logs 
+        
+        [Space(10)]
+        [SerializeField] ConfigData.So_EnemyConfig so_EnemyConfig;
+        [field: SerializeField] public Enemy enemy { get; private set; }
+        [field: SerializeField] public ConfigData.XPGemTypeEnum gemTypeEnum { get; private set; }
         [field: SerializeField] public Health m_Health { get; private set; }
         [field: SerializeField] public Movement m_Movement { get; private set; }
 
-        [Space(20)]
-        [SerializeField] int maxHealth;
-        [SerializeField] float moveSpeed;
-        [SerializeField] float MaxLocomotionBlendAmount;
-        [field: SerializeField] public float AttackRange { get; private set; }
-        [field: SerializeField] public float AttackRate { get; private set; }
-        [field: SerializeField] public float AttackDamage { get; private set; }
 
 
 
@@ -31,6 +26,11 @@ namespace Mini_Vampire_Surviours.Gameplay.EnemySystem
 
         public Animator animator { get { return enemy?.animator; } }
         public Transform t_Enemy { get; private set; }
+        public float AttackRate => so_EnemyConfig.AttackRate;
+        public float AttackRange => so_EnemyConfig.AttackRange;
+        public float AttackDamage => so_EnemyConfig.AttackDamage;
+
+
 
         public IDamagable playerDamagable;
 
@@ -81,8 +81,8 @@ namespace Mini_Vampire_Surviours.Gameplay.EnemySystem
             Target = target; 
             playerDamagable = target.GetComponent<IDamagable>();
 
-            m_Health.Init(maxHealth);
-            m_Movement.Init(enemy.transform, moveSpeed, AnimatorParameterKeyEnum.MoveSpeed.ToString(), MaxLocomotionBlendAmount);
+            m_Health.Init(so_EnemyConfig.maxHealth);
+            m_Movement.Init(enemy.transform, so_EnemyConfig.moveSpeed, AnimatorParameterKeyEnum.MoveSpeed.ToString());
             enemy.Init(m_Health);
 
             ChangeState(EnemyStateEnum.Idle);
@@ -98,7 +98,7 @@ namespace Mini_Vampire_Surviours.Gameplay.EnemySystem
 
         public bool Check_IsPlayerInRange()
         {
-            return Vector2.Distance(Target.position, t_Enemy.position) < AttackRange;
+            return Vector2.Distance(Target.position, t_Enemy.position) < so_EnemyConfig.AttackRange;
         }
 
 

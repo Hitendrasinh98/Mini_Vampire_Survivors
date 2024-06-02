@@ -347,8 +347,8 @@ GameObject:
   - component: {fileID: 3944618249690046325}
   - component: {fileID: 7689212538532450813}
   - component: {fileID: 7166855306596383730}
-  - component: {fileID: 6221806675795597369}
   - component: {fileID: 2013904790356422271}
+  - component: {fileID: 5504016620919267913}
   m_Layer: 7
   m_Name: Enemy
   m_TagString: Enemy
@@ -365,7 +365,7 @@ Transform:
   m_GameObject: {fileID: 595083154210128455}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 8.39, y: -4.8, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.15, y: 0.15, z: 0.15}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -406,8 +406,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <animator>k__BackingField: {fileID: 7689212538532450813}
---- !u!61 &6221806675795597369
-BoxCollider2D:
+--- !u!50 &2013904790356422271
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 595083154210128455}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
+--- !u!60 &5504016620919267913
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -438,7 +465,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.1942153, y: 4.05078}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -448,36 +475,30 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 4.606859, y: 8.6576395}
-  m_EdgeRadius: 0
---- !u!50 &2013904790356422271
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 595083154210128455}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 4
+  m_Points:
+    m_Paths:
+    - - {x: 2.5052009, y: 1.3457626}
+      - {x: 2.216905, y: 2.503644}
+      - {x: 1.8746696, y: 4.2184463}
+      - {x: 1.7331825, y: 4.744782}
+      - {x: 1.730099, y: 6.4964643}
+      - {x: 1.0298095, y: 7.3246064}
+      - {x: -0.32718658, y: 7.392715}
+      - {x: -1.3993771, y: 7.053744}
+      - {x: -1.8613815, y: 6.429724}
+      - {x: -2.0405324, y: 5.622128}
+      - {x: -1.8006452, y: 4.6328177}
+      - {x: -2.4581974, y: 2.9928567}
+      - {x: -3.0729675, y: 1.4526218}
+      - {x: -2.2334352, y: 0.94589657}
+      - {x: -2.25111, y: -0.12569642}
+      - {x: -1.3789194, y: 0.0070010126}
+      - {x: -0.82037604, y: 0.69325864}
+      - {x: 0.5449996, y: 0.51727074}
+      - {x: 0.7964669, y: -0.15464383}
+      - {x: 1.972031, y: -0.23014933}
+      - {x: 1.7564344, y: 0.88788474}
+  m_UseDelaunayMesh: 0
 --- !u!1 &806105922190456059
 GameObject:
   m_ObjectHideFlags: 0
@@ -1150,16 +1171,11 @@ MonoBehaviour:
   - {fileID: 6476800884861527422}
   activeState: {fileID: 0}
   currentStateEnum: 0
+  so_EnemyConfig: {fileID: 11400000, guid: cd4f93dc49967e34bbc6644731dfdc33, type: 2}
   <enemy>k__BackingField: {fileID: 7166855306596383730}
   <gemTypeEnum>k__BackingField: 3
   <m_Health>k__BackingField: {fileID: 5678236973539478517}
   <m_Movement>k__BackingField: {fileID: 6676812295022226844}
-  maxHealth: 20
-  moveSpeed: 3.5
-  MaxLocomotionBlendAmount: 2
-  <AttackRange>k__BackingField: 1
-  <AttackRate>k__BackingField: 3
-  <AttackDamage>k__BackingField: 10
   <Target>k__BackingField: {fileID: 0}
 --- !u!1 &3093830085840529425
 GameObject:
@@ -1696,7 +1712,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <StateEnum>k__BackingField: 4
-  deathDelay: 2
+  deathDelay: 0.5
 --- !u!1 &5251713504759396760
 GameObject:
   m_ObjectHideFlags: 0
@@ -1742,10 +1758,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animBlendSpeed: 3
+  MaxLocomotionBlendAmount: 2
   target: {fileID: 0}
   moveSpeed: 5
   locoMotionBlendTreeKey: 
-  maxBlendAmount: 0
+  maxBlendAmount: 2
 --- !u!1 &5818104447077305579
 GameObject:
   m_ObjectHideFlags: 0

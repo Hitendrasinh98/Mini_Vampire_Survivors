@@ -1,3 +1,4 @@
+using Mini_Vampire_Surviours.Gameplay.ConfigData;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,9 +7,7 @@ namespace Mini_Vampire_Surviours.Gameplay.spawnSystem
 {
     public class SpawnManager : MonoBehaviour
     {
-        [SerializeField] List<SpawnData> avialableSpawnItem = new List<SpawnData>();
-        [SerializeField] List<WaveData> waveDataConfig = new List<WaveData>();
-
+        [SerializeField] ConfigData.So_SpawnConfig so_SpawnConfig;
         [SerializeField] float spawnOffset;
 
         [Header("Current Progress")]
@@ -63,12 +62,12 @@ namespace Mini_Vampire_Surviours.Gameplay.spawnSystem
 
         void Set_Wave()
         {
-            currentwave = waveDataConfig[0];
-            for (int i = 0; i < waveDataConfig.Count; i++)
+            currentwave = so_SpawnConfig.waveDataConfig[0];
+            for (int i = 0; i < so_SpawnConfig.waveDataConfig.Count; i++)
             {
-                if(currentLevel>= waveDataConfig[i].minLevel  && currentLevel <= waveDataConfig[i].maxLevel)
+                if(currentLevel>= so_SpawnConfig.waveDataConfig[i].minLevel  && currentLevel <= so_SpawnConfig.waveDataConfig[i].maxLevel)
                 {
-                    currentwave = waveDataConfig[i];
+                    currentwave = so_SpawnConfig.waveDataConfig[i];
                     break;
                 }
             }
@@ -78,7 +77,7 @@ namespace Mini_Vampire_Surviours.Gameplay.spawnSystem
         {
             Set_Wave();
             Stop_Allspawnner();
-            foreach (SpawnData enemyData in avialableSpawnItem)
+            foreach (SpawnData enemyData in so_SpawnConfig.avialableSpawnItem)
             {
                 if (currentLevel >= enemyData.LevelRequired )
                 {
@@ -146,21 +145,7 @@ namespace Mini_Vampire_Surviours.Gameplay.spawnSystem
    
 
 
-        [System.Serializable]
-        struct SpawnData
-        {
-            public int LevelRequired;
-            public float spawnRate;
-            public EnemySystem.EnemyFSM prefab;            
-        }
-
-        [System.Serializable]
-        struct WaveData
-        {
-            public int minLevel;
-            public int maxLevel;
-            public float spawnMultipler;
-        }
+      
     }
 
 }

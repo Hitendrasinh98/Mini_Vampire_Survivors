@@ -1,3 +1,4 @@
+using Mini_Vampire_Surviours.Gameplay.ConfigData;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,7 +9,7 @@ namespace Mini_Vampire_Surviours.Gameplay.UISystem
     {
         [SerializeField] List<LevelUpSystem.Rect_PowerUp> rect_PowerUps = new List<LevelUpSystem.Rect_PowerUp>();
 
-        public void Set_UI(List<LevelUpSystem.LevelUpPower> levelUpPowerConfig)
+        public void Set_UI(List<LevelUpPower> levelUpPowerConfig)
         {
             for (int i = 0; i < levelUpPowerConfig.Count; i++)
             {

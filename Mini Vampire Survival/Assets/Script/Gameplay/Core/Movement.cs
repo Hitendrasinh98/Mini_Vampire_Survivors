@@ -7,12 +7,13 @@ namespace Mini_Vampire_Surviours.Gameplay.Core
     public class Movement : MonoBehaviour, IMovable
     {
         [SerializeField] float animBlendSpeed = 3;
+        [SerializeField] float MaxLocomotionBlendAmount = 2;
 
         [Header("current Progress")]
         [SerializeField] Transform target;
         [SerializeField] float moveSpeed = 5f;
         [SerializeField] string locoMotionBlendTreeKey;
-        [SerializeField] float maxBlendAmount;
+        [SerializeField] float maxBlendAmount = 2;
 
 
         Animator animator;
@@ -21,11 +22,10 @@ namespace Mini_Vampire_Surviours.Gameplay.Core
         float currentBlendAmount;
         Vector3 initialScale;
 
-        public void Init(Transform target, float moveSpeed, string locoMotionBlendTreeKey, float maxBlendAmount)
+        public void Init(Transform target, float moveSpeed, string locoMotionBlendTreeKey)
         {
             this.moveSpeed = moveSpeed;
             this.locoMotionBlendTreeKey = locoMotionBlendTreeKey;
-            this.maxBlendAmount = maxBlendAmount;
 
             this.target = target;
             animator = target.GetComponent<Animator>();
