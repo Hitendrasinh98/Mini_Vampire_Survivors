@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-namespace Mini_Vampire_Surviours.Gameplay.Enemy
+namespace Mini_Vampire_Surviours.Gameplay.EnemySystem
 {
     public class EnemyState_Chase : Core.State<EnemyFSM, EnemyStateEnum>
     {
@@ -10,6 +10,8 @@ namespace Mini_Vampire_Surviours.Gameplay.Enemy
         public override void Enter()
         {
             fsm.animator.Play(AnimNameEnum.Locomotion.ToString(), 0, 0);
+            fsm.animator.SetAnimatorFloatKey(AnimatorParameterKeyEnum.MoveSpeed, 0);
+            fsm.enemy.AddObserver_OnHit(OnTookDamage);
         }
 
         public override void GameFixedUpdate()
@@ -19,7 +21,8 @@ namespace Mini_Vampire_Surviours.Gameplay.Enemy
 
         public override void Exit()
         {
-
+            fsm.enemy.RemoveObserver_OnHit(OnTookDamage);
+            fsm.animator.SetAnimatorFloatKey(AnimatorParameterKeyEnum.MoveSpeed, 0);
         }
 
 
@@ -35,6 +38,12 @@ namespace Mini_Vampire_Surviours.Gameplay.Enemy
                 direction = (fsm.Target.position - fsm.t_Enemy.position).normalized;
                 fsm.m_Movement.Move(direction);
             }
+        }
+
+        void OnTookDamage(float damageAmount)
+        {
+            fsm.animator.TrigerAnimation(AnimatorParameterKeyEnum.OnHit);
+            fsm.m_Health.TakeDamage(damageAmount);
         }
 
     }

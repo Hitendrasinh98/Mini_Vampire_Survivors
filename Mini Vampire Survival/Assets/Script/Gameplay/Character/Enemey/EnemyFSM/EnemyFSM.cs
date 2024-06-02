@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Mini_Vampire_Surviours.Gameplay.Enemy
+namespace Mini_Vampire_Surviours.Gameplay.EnemySystem
 {
     public enum EnemyStateEnum { None, Idle, Chase, Attack ,Died };
     public enum AnimatorParameterKeyEnum { MoveSpeed, AttackIndex, OnAttack, OnHit, IsDied };
@@ -33,8 +33,13 @@ namespace Mini_Vampire_Surviours.Gameplay.Enemy
         protected override void Awake()
         {
             base.Awake();
+            m_Health.AddObserver_OnDied(OnDied);
         }
 
+        private void OnDestroy()
+        {
+            m_Health.RemoveObserver_OnDied(OnDied);
+        }
 
 
         private void Update()
@@ -87,6 +92,14 @@ namespace Mini_Vampire_Surviours.Gameplay.Enemy
         public bool Check_IsPlayerInRange()
         {
             return Vector2.Distance(Target.position, t_Enemy.position) < AttackRange;
+        }
+
+
+        
+
+        void OnDied()
+        {
+            ChangeState(EnemyStateEnum.Died);
         }
     }
 }

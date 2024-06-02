@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Mini_Vampire_Surviours.Gameplay.Enemy
+namespace Mini_Vampire_Surviours.Gameplay.EnemySystem
 {
     public class Enemy : MonoBehaviour ,IDamagable
     {

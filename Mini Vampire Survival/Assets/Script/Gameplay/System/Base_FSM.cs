@@ -29,8 +29,16 @@ namespace Mini_Vampire_Surviours.Gameplay.Core
             activeState?.Exit();
             activeState = availableStates.Find(state => state.StateEnum.Equals(changeStateToEnum));
             activeState?.Enter();
-            currentStateEnum = activeState.StateEnum;
+            if (activeState != null)
+                currentStateEnum = activeState.StateEnum;
+            else
+            {
+                System.Array values = System.Enum.GetValues(typeof(TEnum));
+                currentStateEnum = (TEnum)values.GetValue(0);
+            }
         }
+
+
 
         
     }

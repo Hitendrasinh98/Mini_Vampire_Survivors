@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-namespace Mini_Vampire_Surviours.Gameplay.Enemy
+namespace Mini_Vampire_Surviours.Gameplay.EnemySystem
 {
     public class EnemyState_Attack : Core.State<EnemyFSM, EnemyStateEnum>
     {
@@ -12,6 +12,8 @@ namespace Mini_Vampire_Surviours.Gameplay.Enemy
         {
             fsm.animator.Play(AnimNameEnum.Locomotion.ToString(), 0, 0);
             fsm.animator.SetAnimatorFloatKey(AnimatorParameterKeyEnum.MoveSpeed, 0);
+            fsm.enemy.AddObserver_OnHit(OnTookDamage);
+
             AttackRate = fsm.AttackRate;
             currentTimer = AttackRate;
         }
@@ -21,6 +23,7 @@ namespace Mini_Vampire_Surviours.Gameplay.Enemy
         public override void Exit()
         {
             currentTimer = 0;
+            fsm.enemy.RemoveObserver_OnHit(OnTookDamage);
         }
 
         public override void GameFixedUpdate()
@@ -53,5 +56,11 @@ namespace Mini_Vampire_Surviours.Gameplay.Enemy
             fsm.playerDamagable.TakeDamage(fsm.AttackDamage);
         }
 
+
+        void OnTookDamage(float damageAmount)
+        {
+            fsm.animator.TrigerAnimation(AnimatorParameterKeyEnum.OnHit);
+            fsm.m_Health.TakeDamage(damageAmount);
+        }
     }
 }
