@@ -210,6 +210,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5979803645548255952}
+  - component: {fileID: 7820047748829493997}
   m_Layer: 0
   m_Name: Parent_LevelUp
   m_TagString: Untagged
@@ -238,6 +239,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &7820047748829493997
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5019198002238026956}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b1bb94c17596644387ea826b46dac9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slider_XpLevel: {fileID: 1860019194561510517}
+  txt_health: {fileID: 2404200456195083964}
 --- !u!1 &6320158308202998347
 GameObject:
   m_ObjectHideFlags: 0

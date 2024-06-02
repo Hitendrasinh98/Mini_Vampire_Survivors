@@ -48,13 +48,17 @@ namespace Mini_Vampire_Surviours.Gameplay.Core
         public void RemoveObserver_OnPlayerHit(Action<float, float, int> callback) => OnPlayerGotHit -= callback;
 
 
+        
+
+
         /// <summary>
         /// Used to Notify everyone for Player Collect some Xp Gems
         /// will notify with xpAmountCollected, CurrentXPAmount, MaxXPAmountNeeded
         /// </summary>
-        public Action<int, int, int> OnXPLevelCollect;  //action <collected XP, currentXP, MaxXPNeededCurrentLevel>
-        public void AddObserver_OnXPLevelCollect(Action<int, int, int> callback) => OnXPLevelCollect += callback;
-        public void RemoveObserver_OnXPLevelCollect(Action<int, int, int> callback) => OnXPLevelCollect -= callback;
+        public Action<int, int ,int> OnXPGemCollect;  //action <currentXP, MaxXPNeededCurrentLevel>
+        public void AddObserver_OnXPGemCollect(Action<int, int ,int> callback) => OnXPGemCollect += callback;
+        public void RemoveObserver_OnXPGemCollect(Action<int, int ,int> callback) => OnXPGemCollect -= callback;
+
 
         /// <summary>
         /// Used to Notify everyone for current Game complete either won or gameOver
@@ -62,6 +66,7 @@ namespace Mini_Vampire_Surviours.Gameplay.Core
         public Action OnGameComeplete;
         public void AddObserver_OnGameComeplete(Action callback) => OnGameComeplete += callback;
         public void RemoveObserver_OnGameComeplete(Action callback) => OnGameComeplete  -= callback;
+
 
     }
 }
