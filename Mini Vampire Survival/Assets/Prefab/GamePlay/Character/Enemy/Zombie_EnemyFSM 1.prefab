@@ -1975,7 +1975,7 @@ MonoBehaviour:
   <gemTypeEnum>k__BackingField: 1
   <m_Health>k__BackingField: {fileID: 4574856428829590295}
   <m_Movement>k__BackingField: {fileID: 8046971330945024324}
-  maxHealth: 30
+  maxHealth: 50
   moveSpeed: 2
   MaxLocomotionBlendAmount: 2
   <AttackRange>k__BackingField: 1.5

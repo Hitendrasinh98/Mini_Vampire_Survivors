@@ -7,6 +7,8 @@ namespace Mini_Vampire_Surviours.Gameplay.spawnSystem
     public class SpawnManager : MonoBehaviour
     {
         [SerializeField] List<SpawnData> avialableSpawnItem = new List<SpawnData>();
+        [SerializeField] List<WaveData> waveDataConfig = new List<WaveData>();
+
         [SerializeField] float spawnOffset;
 
         [Header("Current Progress")]
@@ -14,7 +16,8 @@ namespace Mini_Vampire_Surviours.Gameplay.spawnSystem
         [SerializeField] private int currentLevel;
         [SerializeField] private float screenWidth;
         [SerializeField] private float screenHeight;
-        
+        [SerializeField] WaveData currentwave;
+
         List<Coroutine> activeCorotine = new List<Coroutine>();
 
         GameObject EnemyParent ;
@@ -41,30 +44,43 @@ namespace Mini_Vampire_Surviours.Gameplay.spawnSystem
         {
             enemyTarget = Mediator.Instance.m_Player.transform;
             currentLevel = gameStartData.XPLevel;
-            AddEnemySpanerCoroting(0, currentLevel);
+            Start_Wave();
         }
 
         void OnXPLevelUp(int newLevel)
         {
-            AddEnemySpanerCoroting(currentLevel, newLevel);
             currentLevel = newLevel;
+            Set_Wave();
+            Start_Wave();
         }
 
 
         void OnGameComplete()
         {
-            for (int i = 0; i < activeCorotine.Count; i++)
-            {
-                StopCoroutine(activeCorotine[i]);
-            }
+            Stop_Allspawnner();
         }
 
 
-        void AddEnemySpanerCoroting(int fromLevel ,  int toLevel)
+        void Set_Wave()
         {
+            currentwave = waveDataConfig[0];
+            for (int i = 0; i < waveDataConfig.Count; i++)
+            {
+                if(currentLevel>= waveDataConfig[i].minLevel  && currentLevel <= waveDataConfig[i].maxLevel)
+                {
+                    currentwave = waveDataConfig[i];
+                    break;
+                }
+            }
+        }
+
+        void Start_Wave()
+        {
+            Set_Wave();
+            Stop_Allspawnner();
             foreach (SpawnData enemyData in avialableSpawnItem)
             {
-                if (fromLevel >= enemyData.LevelRequired && enemyData.LevelRequired <= toLevel)
+                if (currentLevel >= enemyData.LevelRequired )
                 {
                     Coroutine spawn_Corotine = StartCoroutine(SpawnEnemy(enemyData));
                     activeCorotine.Add(spawn_Corotine);
@@ -72,11 +88,20 @@ namespace Mini_Vampire_Surviours.Gameplay.spawnSystem
             }
         }
 
+        void Stop_Allspawnner()
+        {
+            for (int i = 0; i < activeCorotine.Count; i++)
+            {
+                StopCoroutine(activeCorotine[i]);
+            }
+            activeCorotine.Clear();
+        }
+
         IEnumerator SpawnEnemy(SpawnData enemyData)
         {
             while (true)
             {
-                yield return new WaitForSeconds(enemyData.spawnRate);
+                yield return new WaitForSeconds(enemyData.spawnRate * currentwave.spawnMultipler);
 
                 // Get a random position at the border of the screen
                 Vector3 spawnPosition = GetRandomBorderPosition();
@@ -127,6 +152,14 @@ namespace Mini_Vampire_Surviours.Gameplay.spawnSystem
             public int LevelRequired;
             public float spawnRate;
             public EnemySystem.EnemyFSM prefab;            
+        }
+
+        [System.Serializable]
+        struct WaveData
+        {
+            public int minLevel;
+            public int maxLevel;
+            public float spawnMultipler;
         }
     }
 

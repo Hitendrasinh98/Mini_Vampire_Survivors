@@ -19,6 +19,10 @@ namespace Mini_Vampire_Surviours.Gameplay.StatesSystem
         public void AddObserver_OnSurviveTimeIncrease(System.Action<int> callback) => OnSurvivingTimeIncrease += callback;
         public void RemoveObserver_OnSurviveTimeIncrease(System.Action<int> callback) => OnSurvivingTimeIncrease -= callback;
 
+        System.Action<int> OnTotalKilledIncrease;  //action<seconds>
+        public void AddObserver_OnTotalKilledIncrease(System.Action<int> callback) => OnTotalKilledIncrease += callback;
+        public void RemoveObserver_OnTotalKilledIncrease(System.Action<int> callback) => OnTotalKilledIncrease -= callback;
+
 
         Coroutine surviveRoutine;
 
@@ -57,6 +61,7 @@ namespace Mini_Vampire_Surviours.Gameplay.StatesSystem
         public void OnKilledEnemy()
         {
             totalKilled++;
+            OnTotalKilledIncrease?.Invoke(totalKilled);
         }
 
         IEnumerator Co_StartSurvingTimer()

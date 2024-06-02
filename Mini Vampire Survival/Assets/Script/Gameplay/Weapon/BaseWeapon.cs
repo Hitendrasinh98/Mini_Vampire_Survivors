@@ -56,7 +56,9 @@ namespace Mini_Vampire_Surviours.Gameplay.WeaponSystem
 
         public void PowerUp_FireRate(float amount)
         {
-            fireRate =Mathf.Clamp(FireRate -  amount , 0 , fireRate);
+            fireRate -= amount;
+            if (fireRate <= 0.25f)
+                fireRate = 0.25f;
         }
 
         public void PowerUp_PrimaryWeaponDamage(float damage)
