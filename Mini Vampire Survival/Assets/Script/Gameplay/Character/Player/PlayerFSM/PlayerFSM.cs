@@ -26,11 +26,14 @@ namespace Mini_Vampire_Surviours.Gameplay.PlayerSystem
         {
             base.Awake();
             EventManager.Instance.AddObserver_OnGameStart(OnGameStart);
+            EventManager.Instance.AddObserver_OnGameComeplete(OnGameComplete);
+
         }
 
         private void OnDestroy()
         {
             EventManager.Instance.RemoveObserver_OnGameStart(OnGameStart);
+            EventManager.Instance.RemoveObserver_OnGameComeplete(OnGameComplete);
         }
 
         private void Update()
@@ -61,6 +64,11 @@ namespace Mini_Vampire_Surviours.Gameplay.PlayerSystem
         {
             Initialize(gameStartData.MaxHealth, gameStartData.MoveSpeed);
             ChangeState(PlayerStateEnum.Idle);
+        }
+
+        void OnGameComplete()
+        {
+            ChangeState(PlayerStateEnum.None);
         }
 
         void Initialize(int maxHealth , float moveSpeed)

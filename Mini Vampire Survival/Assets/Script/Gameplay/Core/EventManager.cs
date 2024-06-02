@@ -9,7 +9,7 @@ namespace Mini_Vampire_Surviours.Gameplay.Core
     /// This is a EventManager witch will be used to brodcast information between publisher and observers
     /// This is Singleton class so anyone can assigne events and fire events when needed
     /// </summary>
-    [DefaultExecutionOrder(-1)]
+    [DefaultExecutionOrder(-2)]
     public class EventManager : MonoBehaviour
     {
         static EventManager instance;

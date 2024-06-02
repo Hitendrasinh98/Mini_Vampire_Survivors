@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 2315635009241900813}
   - component: {fileID: 4991858688255348181}
   - component: {fileID: 7341562162942366829}
+  - component: {fileID: 823670720071526589}
   m_Layer: 0
   m_Name: txt_SurviveDurtion
   m_TagString: Untagged
@@ -257,6 +258,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &823670720071526589
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8657597170880173166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 127b3cc3a7d21294db7a8f06fd502c5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  txt_Survived: {fileID: 7341562162942366829}
 --- !u!1001 &1605381128085796892
 PrefabInstance:
   m_ObjectHideFlags: 0

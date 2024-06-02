@@ -12,6 +12,7 @@ namespace Mini_Vampire_Surviours.Gameplay.EnemySystem
         public override void Enter()
         {
             fsm.animator.SetAnimatorBoolKey(AnimatorParameterKeyEnum.IsDied, true);
+            StatesSystem.StatesManager.Instance.OnKilledEnemy();
             deathRoutine = StartCoroutine(Co_Death()); //Invoke(nameof(SpawnGem), deathDelay);
         }
 

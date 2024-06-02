@@ -10,7 +10,7 @@ namespace Mini_Vampire_Surviours.Gameplay.PlayerSystem
         public override void Enter()
         {
             fsm.animator.SetAnimatorBoolKey(AnimatorParameterKeyEnum.IsDied , true);
-            EventManager.Instance.OnGameComeplete?.Invoke();
+            Mediator.Instance.m_GameManager.OnPlayerDied();
         }
 
         public override void Exit()
