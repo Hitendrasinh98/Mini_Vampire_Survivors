@@ -38,11 +38,13 @@ namespace Mini_Vampire_Surviours.Gameplay.EnemySystem
         {
             base.Awake();
             m_Health.AddObserver_OnDied(OnDied);
+            EventManager.Instance.AddObserver_OnGameComeplete(DeActivateSystem);
         }
 
         private void OnDestroy()
         {
             m_Health.RemoveObserver_OnDied(OnDied);
+            EventManager.Instance.RemoveObserver_OnGameComeplete(DeActivateSystem);
         }
 
 
@@ -74,15 +76,15 @@ namespace Mini_Vampire_Surviours.Gameplay.EnemySystem
 
         public void ActivateSystem(Transform target )
         {
+            t_Enemy = enemy.transform;
+            
             Target = target; 
+            playerDamagable = target.GetComponent<IDamagable>();
+
             m_Health.Init(maxHealth);
             m_Movement.Init(enemy.transform, moveSpeed, AnimatorParameterKeyEnum.MoveSpeed.ToString(), MaxLocomotionBlendAmount);
-            t_Enemy = enemy.transform;
-            t_Enemy.position = Vector2.zero;
-            t_Enemy.localPosition = Vector2.zero;
-            playerDamagable = target.GetComponent<IDamagable>();
-            if (playerDamagable == null)
-                Debug.LogError(ChannelKey + "We didnt get the damazable component on player");
+            enemy.Init(m_Health);
+
             ChangeState(EnemyStateEnum.Idle);
             ChangeState(EnemyStateEnum.Chase);
         }
@@ -107,9 +109,5 @@ namespace Mini_Vampire_Surviours.Gameplay.EnemySystem
             ChangeState(EnemyStateEnum.Died);
         }
 
-        public GameObject Get_GameObject()
-        {
-            return gameObject;
-        }
     }
 }

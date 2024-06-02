@@ -11,6 +11,7 @@ namespace Mini_Vampire_Surviours.Gameplay
         [SerializeField] int PlayerMaxHealth = 100;
         [SerializeField] int StartXpLevel = 1;
         [SerializeField] float MoveSpeed = 7;
+        [SerializeField] WeaponSystem.WeaponTypeEnum primaryWeapon;
 
 
         private void Awake()
@@ -30,6 +31,7 @@ namespace Mini_Vampire_Surviours.Gameplay
             gameStartData.MaxHealth = PlayerMaxHealth;
             gameStartData.XPLevel = StartXpLevel;
             gameStartData.MoveSpeed = MoveSpeed;
+            gameStartData.primaryWeapon = primaryWeapon;
 
             Core.EventManager.Instance.OnGameStart?.Invoke(gameStartData);
         }

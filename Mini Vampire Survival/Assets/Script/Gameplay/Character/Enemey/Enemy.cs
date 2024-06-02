@@ -10,12 +10,20 @@ namespace Mini_Vampire_Surviours.Gameplay.EnemySystem
         [field: SerializeField] public Animator animator { get; private set; }
 
 
+        IHealth healthComponent;
+
+
+        public void Init(IHealth healhtComponnet)
+        {
+            this.healthComponent = healhtComponnet;
+        }
 
         System.Action<float> OnTookDamage; //TookDamage
         public void AddObserver_OnHit(System.Action<float> callback) => OnTookDamage += callback;
         public void RemoveObserver_OnHit(System.Action<float> callback) => OnTookDamage -= callback;
 
 
+        public bool IsAllive => healthComponent.IsAlive;
         public void TakeDamage(float damageAmount)
         {
             OnTookDamage?.Invoke(damageAmount);

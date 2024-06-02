@@ -7,17 +7,27 @@ namespace Mini_Vampire_Surviours.Gameplay.EnemySystem
     public class EnemyState_Died : Core.State<EnemyFSM,EnemyStateEnum>
     {
         [SerializeField] float deathDelay = 2;
+        Coroutine deathRoutine;
+
         public override void Enter()
         {
             fsm.animator.SetAnimatorBoolKey(AnimatorParameterKeyEnum.IsDied, true);
-            Invoke(nameof(SpawnGem), deathDelay);
+            deathRoutine = StartCoroutine(Co_Death()); //Invoke(nameof(SpawnGem), deathDelay);
         }
 
         public override void Exit()
         {
-            CancelInvoke(nameof(SpawnGem));
+            print("we are here");
+            if (deathRoutine != null)
+                StopCoroutine(deathRoutine);// CancelInvoke(nameof(SpawnGem));
         }
 
+
+        IEnumerator Co_Death()
+        {
+            yield return new WaitForSeconds(deathDelay);
+            SpawnGem();
+        }
 
         void SpawnGem()
         {

@@ -6,6 +6,7 @@ namespace Mini_Vampire_Surviours.Gameplay.Core
 {
     public interface IDamagable
     {
+        bool IsAllive { get; }
         void TakeDamage(float damageAmount);
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Mini_Vampire_Surviours.Gameplay.Core
 {
-    public class Health : MonoBehaviour
+    public class Health : MonoBehaviour,IHealth
     {
 
         [field: Header("Current Progress"),SerializeField] public int maxHealth { get; private set; }

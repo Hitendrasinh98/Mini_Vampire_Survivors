@@ -37,6 +37,7 @@ namespace Mini_Vampire_Surviours.Gameplay.Core
             public int MaxHealth;
             public int XPLevel;
             public float MoveSpeed;
+            public WeaponSystem.WeaponTypeEnum primaryWeapon;
         }
 
         /// <summary>

@@ -13,7 +13,7 @@ namespace Mini_Vampire_Surviours.Gameplay
 
         [field: SerializeField] public GameManager m_GameManager;
         [field: SerializeField] public LevelUpSystem.XPLevelManager m_XPLevelManager;
-        [field: SerializeField] public Transform t_Player;
+        [field: SerializeField] public PlayerSystem.Player m_Player;
 
 
 

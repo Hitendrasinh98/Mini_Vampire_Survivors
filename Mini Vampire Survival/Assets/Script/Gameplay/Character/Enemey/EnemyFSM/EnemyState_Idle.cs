@@ -10,7 +10,8 @@ namespace Mini_Vampire_Surviours.Gameplay.EnemySystem
         {
             fsm.animator.ResetAnimator();
             fsm.animator.Play(AnimNameEnum.Locomotion.ToString(), 0, 0);
-
+            fsm.t_Enemy.position = Vector2.zero;
+            fsm.t_Enemy.localPosition = Vector2.zero;
         }
 
         public override void Exit()

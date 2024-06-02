@@ -16,8 +16,8 @@ namespace Mini_Vampire_Surviours.Gameplay.spawnSystem
         [SerializeField] private float screenHeight;
         
         List<Coroutine> activeCorotine = new List<Coroutine>();
-        List<EnemySystem.IEnemy> activeEnemies = new List<EnemySystem.IEnemy>();
 
+        GameObject EnemyParent ;
         void Awake()
         {
             // Get screen dimensions
@@ -27,7 +27,7 @@ namespace Mini_Vampire_Surviours.Gameplay.spawnSystem
             Core.EventManager.Instance.AddObserver_OnGameStart(OnGameStart);
             Core.EventManager.Instance.AddObserver_OnXpLevelUP(OnXPLevelUp);
             Core.EventManager.Instance.AddObserver_OnGameComeplete(OnGameComplete);
-
+            EnemyParent = new GameObject("Enemy Parent");
         }
 
         private void OnDestroy()
@@ -39,7 +39,7 @@ namespace Mini_Vampire_Surviours.Gameplay.spawnSystem
 
         void OnGameStart(Core.EventManager.GameStartData gameStartData)
         {
-            enemyTarget = Mediator.Instance.t_Player;
+            enemyTarget = Mediator.Instance.m_Player.transform;
             currentLevel = gameStartData.XPLevel;
             AddEnemySpanerCoroting(0, currentLevel);
         }
@@ -56,11 +56,6 @@ namespace Mini_Vampire_Surviours.Gameplay.spawnSystem
             for (int i = 0; i < activeCorotine.Count; i++)
             {
                 StopCoroutine(activeCorotine[i]);
-            }
-
-            for (int i = 0; i < activeEnemies.Count; i++)
-            {
-                activeEnemies[i]?.DeActivateSystem();
             }
         }
 
@@ -85,9 +80,8 @@ namespace Mini_Vampire_Surviours.Gameplay.spawnSystem
 
                 // Get a random position at the border of the screen
                 Vector3 spawnPosition = GetRandomBorderPosition();
-                EnemySystem.EnemyFSM enemyComponent = Instantiate(enemyData.prefab, spawnPosition, Quaternion.identity);
+                EnemySystem.EnemyFSM enemyComponent = Instantiate(enemyData.prefab, spawnPosition, Quaternion.identity,EnemyParent.transform);
                 enemyComponent.ActivateSystem(enemyTarget);
-                activeEnemies.Add(enemyComponent);
             }
         }
 
@@ -132,19 +126,7 @@ namespace Mini_Vampire_Surviours.Gameplay.spawnSystem
         {
             public int LevelRequired;
             public float spawnRate;
-            public EnemySystem.EnemyFSM prefab;
-            
-            private EnemySystem.IEnemy enemyComponent;
-
-            public EnemySystem.IEnemy Get_EnemyComponent()
-            {
-                if (enemyComponent == null)
-                {
-                    Debug.Log("null , Getting Enemy Component");
-                    enemyComponent = prefab.GetComponent<EnemySystem.IEnemy>();
-                }
-                return enemyComponent;
-            }
+            public EnemySystem.EnemyFSM prefab;            
         }
     }
 

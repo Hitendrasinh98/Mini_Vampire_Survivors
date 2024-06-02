@@ -1469,12 +1469,12 @@ MonoBehaviour:
   <gemTypeEnum>k__BackingField: 2
   <m_Health>k__BackingField: {fileID: 763375810817188461}
   <m_Movement>k__BackingField: {fileID: 2162150186306186785}
-  maxHealth: 200
+  maxHealth: 50
   moveSpeed: 1.5
   MaxLocomotionBlendAmount: 2
   <AttackRange>k__BackingField: 2
   <AttackRate>k__BackingField: 5
-  <AttackDamage>k__BackingField: 10
+  <AttackDamage>k__BackingField: 15
   <Target>k__BackingField: {fileID: 0}
 --- !u!1 &7647129616644304765
 GameObject:
@@ -1811,7 +1811,7 @@ GameObject:
   - component: {fileID: 6996595675922930321}
   m_Layer: 7
   m_Name: Biger_Zombie
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
