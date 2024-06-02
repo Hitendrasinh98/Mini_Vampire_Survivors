@@ -78,5 +78,12 @@ namespace Mini_Vampire_Surviours.Gameplay.Core
         public void RemoveObserver_OnGameComeplete(Action callback) => OnGameComeplete  -= callback;
 
 
+        /// <summary>
+        /// Used to Notify everyone for current Game complete either won or gameOver
+        /// </summary>
+        public Action<LevelUpSystem.LevelUPPowerEnum, float> OnPowerUpSelect;
+        public void AddObserver_OnPowerUpSelect(Action<LevelUpSystem.LevelUPPowerEnum, float> callback) => OnPowerUpSelect += callback;
+        public void RemoveObserver_OnPowerUpSelect(Action<LevelUpSystem.LevelUPPowerEnum, float> callback) => OnPowerUpSelect -= callback;
+
     }
 }

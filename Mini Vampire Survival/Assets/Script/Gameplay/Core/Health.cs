@@ -40,6 +40,11 @@ namespace Mini_Vampire_Surviours.Gameplay.Core
             remainingHealth = Mathf.Min(remainingHealth + amount, maxHealth);
         }
 
+        public void PowerHealth(float amount)
+        {
+            maxHealth += (int)amount;
+            remainingHealth += amount;
+        }
 
         void Die()
         {

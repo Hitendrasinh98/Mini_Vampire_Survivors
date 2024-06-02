@@ -1339,8 +1339,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pageID: 3
-  go_WON: {fileID: 4102446443795702982}
-  go_GameOver: {fileID: 2668148157715795713}
+  go_WON: {fileID: 2668148157715795713}
+  go_GameOver: {fileID: 4102446443795702982}
   txt_Survived: {fileID: 2853829953270107942}
   txt_Killed: {fileID: 2168948878821700037}
 --- !u!1 &8754362858848162059

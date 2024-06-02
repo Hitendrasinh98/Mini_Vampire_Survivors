@@ -46,6 +46,7 @@ namespace Mini_Vampire_Surviours.Gameplay.UISystem
                     avaialblePages[i].ShowPage();
                 }
             }
+
         }
 
         public void HidePage(UIPageIDEnum pageId)

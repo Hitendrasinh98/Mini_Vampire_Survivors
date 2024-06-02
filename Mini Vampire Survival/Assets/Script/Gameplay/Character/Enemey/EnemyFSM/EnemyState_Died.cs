@@ -18,7 +18,6 @@ namespace Mini_Vampire_Surviours.Gameplay.EnemySystem
 
         public override void Exit()
         {
-            print("we are here");
             if (deathRoutine != null)
                 StopCoroutine(deathRoutine);// CancelInvoke(nameof(SpawnGem));
         }

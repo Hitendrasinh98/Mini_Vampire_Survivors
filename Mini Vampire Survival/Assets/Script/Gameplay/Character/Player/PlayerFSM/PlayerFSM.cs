@@ -27,6 +27,8 @@ namespace Mini_Vampire_Surviours.Gameplay.PlayerSystem
             base.Awake();
             EventManager.Instance.AddObserver_OnGameStart(OnGameStart);
             EventManager.Instance.AddObserver_OnGameComeplete(OnGameComplete);
+            EventManager.Instance.AddObserver_OnPowerUpSelect(OnPowerSelect);
+
 
         }
 
@@ -34,6 +36,7 @@ namespace Mini_Vampire_Surviours.Gameplay.PlayerSystem
         {
             EventManager.Instance.RemoveObserver_OnGameStart(OnGameStart);
             EventManager.Instance.RemoveObserver_OnGameComeplete(OnGameComplete);
+            EventManager.Instance.RemoveObserver_OnPowerUpSelect(OnPowerSelect);
         }
 
         private void Update()
@@ -70,6 +73,17 @@ namespace Mini_Vampire_Surviours.Gameplay.PlayerSystem
         {
             ChangeState(PlayerStateEnum.None);
         }
+        void OnPowerSelect(LevelUpSystem.LevelUPPowerEnum powerUpType , float amount)
+        {
+            if(powerUpType == LevelUpSystem.LevelUPPowerEnum.Health)
+            {
+                m_Health.PowerHealth(amount);
+                float remaingHealth = m_Health.remainingHealth;
+                int maxHealth = m_Health.maxHealth;
+                EventManager.Instance.OnPlayerGotHit?.Invoke(0, remaingHealth, maxHealth);
+            }
+        }
+
 
         void Initialize(int maxHealth , float moveSpeed)
         {

@@ -37,10 +37,10 @@ namespace Mini_Vampire_Surviours.Gameplay.PlayerSystem
 
         void PlayerTookDamage(float damageAmount)
         {
+            fsm.animator.TrigerAnimation(AnimatorParameterKeyEnum.OnHit);
             fsm.m_Health.TakeDamage(damageAmount);
             float remaingHealth = fsm.m_Health.remainingHealth;
             int maxHealth = fsm.m_Health.maxHealth;
-            fsm.animator.TrigerAnimation(AnimatorParameterKeyEnum.OnHit);
             Core.EventManager.Instance.OnPlayerGotHit?.Invoke(damageAmount, remaingHealth,maxHealth);
         }
 

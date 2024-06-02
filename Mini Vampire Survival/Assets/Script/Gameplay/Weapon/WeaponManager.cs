@@ -20,12 +20,15 @@ namespace Mini_Vampire_Surviours.Gameplay.WeaponSystem
         {
             Core.EventManager.Instance.AddObserver_OnGameStart(OnGameStart);
             Core.EventManager.Instance.AddObserver_OnGameComeplete(OnGameComplete);
+            Core.EventManager.Instance.AddObserver_OnPowerUpSelect(OnPowerSelect);
+
         }
 
         private void OnDestroy()
         {
             Core.EventManager.Instance.RemoveObserver_OnGameStart(OnGameStart);
             Core.EventManager.Instance.RemoveObserver_OnGameComeplete(OnGameComplete);
+            Core.EventManager.Instance.RemoveObserver_OnPowerUpSelect(OnPowerSelect);
         }
 
         void OnGameStart(Core.EventManager.GameStartData gameStartData)
@@ -37,6 +40,18 @@ namespace Mini_Vampire_Surviours.Gameplay.WeaponSystem
         void OnGameComplete()
         {
             DeActivateSystem();
+        }
+
+        void OnPowerSelect(LevelUpSystem.LevelUPPowerEnum powerUpType, float amount)
+        {
+            if (powerUpType == LevelUpSystem.LevelUPPowerEnum.FireRate)
+            {
+                primaryWeapon?.PowerUp_FireRate(amount);
+            }
+            else if (powerUpType == LevelUpSystem.LevelUPPowerEnum.Damage)
+            {
+                primaryWeapon?.PowerUp_PrimaryWeaponDamage(amount);
+            }
         }
 
         public void ActivateSystem(WeaponTypeEnum weaponType)

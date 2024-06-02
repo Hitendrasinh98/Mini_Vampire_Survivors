@@ -11,6 +11,7 @@ namespace Mini_Vampire_Surviours.Gameplay.LevelUpSystem
         [SerializeField] XpGem prefab_XpGem;
         [SerializeField] List<LevelConfig> levelConfigs = new List<LevelConfig>();
         [SerializeField] List<GemSpawnConfig> xpGemTypeConfig = new List<GemSpawnConfig>();
+        [SerializeField] List<LevelUpPower> levelUpPowerConfig = new List<LevelUpPower>();
 
         [Header("Current Progress")]
         [SerializeField] int currentXPGems;
@@ -84,11 +85,27 @@ namespace Mini_Vampire_Surviours.Gameplay.LevelUpSystem
             {
                 currentLevel++;
                 currentXPGems -= requiredXpGems;
-                //Show Popup
                 Set_NextXpLevel();
+                Set_UI();
                 Core.EventManager.Instance.OnXpLevelUP?.Invoke(currentLevel);
+                Core.EventManager.Instance.OnXPGemCollect?.Invoke(currentXPGems, requiredXpGems);
             }
         }
+        void Set_UI()
+        {
+            UISystem.Panel_LevelUp panel_LevelUp = (UISystem.Panel_LevelUp)UISystem.UIManager.Instance.Get_UIPage(UISystem.UIPageIDEnum.LevelUp);
+            if(panel_LevelUp== null)
+            {
+                Debug.LogError("Failed to get the PanelLeveluP refrence");
+                return;
+            }
+
+            panel_LevelUp.Set_UI(levelUpPowerConfig);
+            UISystem.UIManager.Instance.ShowPage(UISystem.UIPageIDEnum.LevelUp);
+            Time.timeScale = 0;
+
+        }
+
 
         GemSpawnConfig Get_XpGemSpawnData(XPGemTypeEnum xPGemType)
         {
@@ -120,6 +137,15 @@ namespace Mini_Vampire_Surviours.Gameplay.LevelUpSystem
         public int spawnAmount;
         public int gemAmountPerItem;
         public float spawnRadius;
+    }
+
+    public enum LevelUPPowerEnum { none ,Health ,FireRate ,Damage };
+    [System.Serializable]
+    public struct LevelUpPower
+    {
+        public LevelUPPowerEnum powerType;
+        public float amount;
+        public string discription;
     }
 
 }
