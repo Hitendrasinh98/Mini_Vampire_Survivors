@@ -1,55 +1,78 @@
-# Mini_Vampire_Survivors
+# Mini Vampire Survivor
 
-This is the replica of the Vampire Survviour.
+A prototype game replicating the core mechanics of Vampire Survivor, with simplified and streamlined gameplay elements.
 
-Info about the game.
-there are total 3 enemy type (Normal , Fast , Big).
-player will have one Weapon MagicWand.
-After enemy die , xpGems will spawn.
-XPGems will be used to LevelUp player.
-every levelUp player will have choice of 3 powerUps (health, damge , Firerate)
+## Game Overview
 
+In Mini Vampire Survivor, the player must survive waves of enemies for 5 minutes to win. The game features:
+- **3 Enemy Types**: Normal, Fast, and Big
+- **Player's Weapon**: Magic Wand
+- **Collectible**: XP Gems (spawned after enemy death, used for leveling up)
+- **Level Up**: Choose from 3 power-ups (Health, Damage, Fire Rate) each level
 
-Objetive:
-if survive for 5 min  , won.
-if player health reduce belove 0 then gameOver.
+### Objectives
+- **Win**: Survive for 5 minutes
+- **Game Over**: Player's health drops below 0
 
+## Programming Patterns Used
 
-Programing Pattern Used:
+### Composition Over Inheritance
+- **Reason**: Avoid long hierarchies, facilitate easy component reuse
 
-Composition is used instead of Inheritance => so that long hyrachy is not needed and easily use components any other systems.
+### Observer Pattern
+- **Purpose**: Decouple systems, centralized event handling
+- **Implementation**: `EventManager` class (singleton)
 
-Observer Pattern => to decouple multiple system , and have a center point where all the data transfers.
-EventManger class is the place where all events are take place witch is also singletone means anyone can subscribe any event and able to get inforamation when needed.
+### Finite State Machine (FSM) Pattern
+- **Purpose**: Manage states of Player and Enemies
+- **Examples**: `PlayerFSM` (Idle, Surviving, Died), `EnemyFSM` (Idle, Chase, Attack, Died)
+- **Flexibility**: Add/remove behaviors without affecting existing ones
 
-Finite State Machine Pattern => so that we can have full controll on each state of Player and Enemy. 
-PlayerFSM , EnemyFSM are responsiable for handling their characters and their behaviour. ex: Idle , Survivng , Died   or Idle , Chase , Attack , Died
-any new behaviour we can add or remove without effecting exiting behaviours.
+### Flyweight Pattern
+- **Purpose**: Optimize memory usage by sharing data
+- **Usage**: Store sensitive data in ScriptableObjects
+  - **Editable Configurations**:
+    - Player Config (max health, start level, move speed, primary weapon)
+    - XP Level Config (levels data, power-ups, gems)
+    - Spawn Config (wave details, enemy types)
+    - Enemy Config (health, attack range, damage, move speed)
 
+### Singleton Pattern
+- **Purpose**: Ensure a single instance accessible globally
+- **Examples**: `StatesManager` (game states like surviving time, enemy kill count)
 
-Flyweight Pattern:
-all the Sensitive data are stored in Scriptable object and passed to their respective system so that even if there are 100 enemies  but there will be only 1 config data in memeory.
-plus it is very handy to edit and upadte value without getting into code or scene directlly form project asset.
-we can currentlly edit ->
-Player Config (max health , start level ,Move Speed , primary weapon)
-XPLevel Config (all 10 levels data ,  list of powerUps , List of Gems will be spawn and collect after enemy die)
-Spawn Config (Wave Config , witch enemy type when will be spawn)
-Enemy Config (Each enemy will have thire cofig file attach , Health , AttackRange , Damage , MoveSpeed)
+### Mediator Pattern
+- **Purpose**: Facilitate interaction between high-level controllers
+- **Usage**: Mediator holds references to GameManager, Player, XPLevelUpManager, etc.
 
+## Game Flow
 
-Singleton Pattern => So that we can have one object avaialbe globally to all.
-States Manager -> responcible for all the states happing in game ex: surving Time , Total enemies killed count ,etc
-withc is avaialbe glowbally to read but writable. will update value based on events when occure like when enemy died they will fire event and our stateManager will get notification and update total kill counter.
+1. **Game Start**: `GameManager` fires `OnGameStart` event
+   - Activates systems: `PlayerFSM`, `SpawnManager`, `StatesManager`, `UIManager`
+2. **Enemy Spawning**: `SpawnManager` spawns enemies per wave config and level
+3. **Gameplay**:
+   - Player moves, kills enemies, and collects XP Gems
+   - Levels up and selects power-ups
+4. **Game End**:
+   - Survive for 5 minutes or health drops to 0
+   - `GameManager` fires `GameComplete` event
+   - Systems deactivate
+   - Game Over UI displayed
 
-something called Mediater => this mediater will have refrence of all the systems high level controllers. so that multiple system can have access  to each other.
-mediater => have refrence of gameManger , Player , XpLevelUpManager etc.
-when enemy activates then they need a player transform to follow so they will acess through this mediater.
+## Installation and Setup
 
+1. Clone the repository
+2. Open the project in your preferred game development environment
+3. Run the game from the main scene
 
-Game Flow =>
-1.Gamemanager will fire event called OnGameStart with all the neccesary detaisl to start game.
-every system will listen to this event and activate their systems like playerFSM , SpawnManager , StatesManaegr ,Uimanager.
-2.Spawn manager will spawn enemies based on waveConfig and current Level.
-3. Player will movearound and kill enemies and collect xpgems to levleup.
-4. once player survive for 5 min or reduce health below 0 then  Gamemanager will fire event GameComplete and every system will listen to this and imidiatlly Deactivate their Systems.
-5. game Over Ui will be shown
+## Contribution
+
+Feel free to open issues and submit pull requests. Contributions are welcome!
+
+## License
+
+This project is licensed under the MIT License.
+
+---
+
+Enjoy playing Mini Vampire Survivor! If you have any questions or feedback, please reach out.
