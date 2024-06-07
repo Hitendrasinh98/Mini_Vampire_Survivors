@@ -4,12 +4,18 @@ using UnityEngine;
 
 namespace Mini_Vampire_Surviours.Gameplay.Core
 {
+    /// <summary>
+    /// Basic Health Component will respresent the health system for their enity wher assigned
+    /// </summary>
     public class Health : MonoBehaviour,IHealth
     {
 
         [field: Header("Current Progress"),SerializeField] public int maxHealth { get; private set; }
         [field: SerializeField] public float remainingHealth { get; private set; }
 
+        /// <summary>
+        /// Event will fired when this healht componnet is reduced belove 0
+        /// </summary>
         System.Action OnDied;
         public void AddObserver_OnDied(System.Action callback) => OnDied += callback;
         public void RemoveObserver_OnDied(System.Action callback) => OnDied -= callback;

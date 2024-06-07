@@ -6,6 +6,7 @@ using UnityEngine;
 namespace Mini_Vampire_Surviours.Gameplay.Core
 {
     /// <summary>
+    /// This is center point for All the game Events that will happen throught out gameplay session. ex: GameStart , LevelUp , Player Died , Game Completes, etc...
     /// This is a EventManager witch will be used to brodcast information between publisher and observers
     /// This is Singleton class so anyone can assigne events and fire events when needed
     /// </summary>

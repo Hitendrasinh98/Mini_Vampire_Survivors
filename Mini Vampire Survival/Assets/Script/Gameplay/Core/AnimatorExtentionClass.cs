@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// This is a Extention method class for Animator to get common fuctionality to every animator on the fly
+/// </summary>
 public static class AnimatorExtentionClass
 {
     /// <summary>

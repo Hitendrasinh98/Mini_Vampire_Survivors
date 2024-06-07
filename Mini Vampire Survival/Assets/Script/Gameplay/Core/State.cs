@@ -9,6 +9,11 @@ using UnityEngine;
 
 namespace Mini_Vampire_Surviours.Gameplay.Core
 {
+    /// <summary>
+    /// This is the base class for all the states that will be define the behaviour of thier respective FSM
+    /// </summary>
+    /// <typeparam name="TFSM"></typeparam>
+    /// <typeparam name="TEnum"></typeparam>
     public abstract class State<TFSM, TEnum> : MonoBehaviour where TFSM : class where TEnum : System.Enum
     {
         [field: SerializeField] public TEnum StateEnum { get; private set; }

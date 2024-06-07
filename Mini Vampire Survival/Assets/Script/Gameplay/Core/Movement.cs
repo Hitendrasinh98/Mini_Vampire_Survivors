@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace Mini_Vampire_Surviours.Gameplay.Core
 {
+    /// <summary>
+    /// Movement Component withc will be used to move any Entity with the healp of IMovalbe interface.    
+    /// </summary>
     public class Movement : MonoBehaviour, IMovable
     {
         [SerializeField] float animBlendSpeed = 3;

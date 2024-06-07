@@ -4,6 +4,12 @@ using UnityEngine;
 
 namespace Mini_Vampire_Surviours.Gameplay.Core
 {
+    /// <summary>
+    /// Genric Base class for FSM 
+    /// any class with their respective state enum can be implement
+    /// </summary>
+    /// <typeparam name="TFSM"> Calss for FSM</typeparam>
+    /// <typeparam name="TEnum">Enum for thier FSM State </typeparam>
     public abstract class Base_FSM<TFSM, TEnum> : MonoBehaviour where TFSM : Base_FSM<TFSM, TEnum> where TEnum : System.Enum
     {
         [SerializeField] List<State<TFSM, TEnum>> availableStates = new List<State<TFSM, TEnum>>();
@@ -12,13 +18,24 @@ namespace Mini_Vampire_Surviours.Gameplay.Core
 
         protected virtual void Awake()
         {
+            InitialzieStates();
+        }
+
+        /// <summary>
+        /// Initlaize all the states available to this FSM
+        /// </summary>
+        void InitialzieStates()
+        {
             for (int i = 0; i < availableStates.Count; i++)
             {
                 availableStates[i].Init((TFSM)this);
             }
         }
-
-
+        /// <summary>
+        /// Will Change state of fsm.
+        /// will exit curretn state and then tranfer to new state
+        /// </summary>
+        /// <param name="changeStateToEnum"></param>
         public virtual void ChangeState(TEnum changeStateToEnum)
         {
             if (activeState != null && activeState.StateEnum.Equals(changeStateToEnum))

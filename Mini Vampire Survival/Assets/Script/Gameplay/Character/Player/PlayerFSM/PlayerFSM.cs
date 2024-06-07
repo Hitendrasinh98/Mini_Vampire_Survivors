@@ -5,10 +5,15 @@ using UnityEngine;
 
 namespace Mini_Vampire_Surviours.Gameplay.PlayerSystem
 {
-    public enum PlayerStateEnum { None ,Idle ,surviving ,Died };
-    public enum AnimatorParameterKeyEnum { MoveSpeed ,AttackIndex ,OnAttack ,OnHit ,IsDied};
-    public enum AnimNameEnum { Locomotion };
+    public enum PlayerStateEnum { None ,Idle ,surviving ,Died }; //Enum for PlayerFSM State 
+    public enum AnimatorParameterKeyEnum { MoveSpeed ,AttackIndex ,OnAttack ,OnHit ,IsDied}; //Enum for Player Animator Parameter keys
+    public enum AnimNameEnum { Locomotion }; //Enum for Player Animator state name
 
+    /// <summary>
+    /// This is the FSM for Player 
+    /// conrtoll player states/Behaviour and tranfer between each other smoothlly
+    /// allow us to import and remove any state/behaviour from the FSM without effecting exiting flow of player mechnics
+    /// </summary>
     public class PlayerFSM : Base_FSM<PlayerFSM,PlayerStateEnum>
     {
         static readonly string ChannelKey = "[PlayerFsM] ";  //will be used to fillter logs 
