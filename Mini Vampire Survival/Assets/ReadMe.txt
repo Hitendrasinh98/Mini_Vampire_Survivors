@@ -13,6 +13,14 @@ if survive for 5 min  , won.
 if player health reduce belove 0 then gameOver.
 
 
+Project Info:
+Unity  : 2022.3.12f1
+Platform : Windows
+Totle Scene : Splash Scene, Game Scene
+Packages : Cinemachine , Projectiles VFX Pakcage
+Asset : all from internet
+
+
 Programing Pattern Used:
 
 Composition is used instead of Inheritance => so that long hyrachy is not needed and easily use components any other systems.
@@ -51,3 +59,5 @@ every system will listen to this event and activate their systems like playerFSM
 3. Player will movearound and kill enemies and collect xpgems to levleup.
 4. once player survive for 5 min or reduce health below 0 then  Gamemanager will fire event GameComplete and every system will listen to this and imidiatlly Deactivate their Systems.
 5. game Over Ui will be shown
+
+
