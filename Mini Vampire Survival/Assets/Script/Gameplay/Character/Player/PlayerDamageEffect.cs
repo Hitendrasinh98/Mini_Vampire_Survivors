@@ -6,7 +6,10 @@ using UnityEngine.Rendering.Universal;
 
 namespace Mini_Vampire_Surviours.Gameplay.PlayerSystem
 {
-
+    /// <summary>
+    /// When Playe get hit
+    /// this effect will play on eadge of screen with some redish type color viggenet effect
+    /// </summary>
     public class PlayerDamageEffect : MonoBehaviour
     {
         public Volume postProcessingVolume;

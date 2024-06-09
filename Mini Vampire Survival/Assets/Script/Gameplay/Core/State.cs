@@ -30,7 +30,7 @@ namespace Mini_Vampire_Surviours.Gameplay.Core
         }
 
         /// <summary>
-        /// use this to ready state every time when we switch the states
+        /// use this to ready state every time when we switch the states.
         /// consider like a OnEneble
         /// </summary>
         public abstract void Enter();

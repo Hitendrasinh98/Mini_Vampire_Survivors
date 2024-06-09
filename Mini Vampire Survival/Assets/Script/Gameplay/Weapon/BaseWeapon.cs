@@ -1,9 +1,14 @@
+using Mini_Vampire_Surviours.Gameplay.Core;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Mini_Vampire_Surviours.Gameplay.WeaponSystem
 {
+    /// <summary>
+    /// This is the base class for the all weapons type
+    /// will handle basic feature of weapons.
+    /// </summary>
     public abstract class BaseWeapon : MonoBehaviour, IWeapon
     {
         [SerializeField] WeaponTypeEnum weaponTypeEnum;
@@ -34,19 +39,28 @@ namespace Mini_Vampire_Surviours.Gameplay.WeaponSystem
 
         protected abstract void Fire();
 
+        /// <summary>
+        /// Will Retrive the nearest alive enemy.
+        /// with help of sonar system where collider will increase at constant distance till full range,
+        /// once we hit the collider then we check alive or not ,
+        /// </summary>
+        /// <returns></returns>
         protected Transform FindNearestEnemy()
         {
             float currentRadius = 1; // Start with a small radius
 
             while (currentRadius <= range)
             {
-                Collider2D hit = Physics2D.OverlapCircle(transform.position, currentRadius, enemyLayer);
+                Collider2D[] hit = Physics2D.OverlapCircleAll(transform.position, currentRadius, enemyLayer);                
                 if (hit != null)
                 {
-                    if(hit.TryGetComponent<Core.IDamagable>(out Core.IDamagable damagable))
+                    for (int i = 0; i < hit.Length; i++)
                     {
-                        if (damagable.IsAllive)
-                            return hit.transform;
+                        if (hit[i].TryGetComponent<IDamagable>(out IDamagable damagable))
+                        {
+                            if (damagable.IsAllive)
+                                return hit[i].transform;
+                        }
                     }
                 }
 
@@ -56,6 +70,10 @@ namespace Mini_Vampire_Surviours.Gameplay.WeaponSystem
             return null;
         }
 
+        /// <summary>
+        /// Will be fired when player select firerate improved powerUp
+        /// </summary>
+        /// <param name="amount">how much firearte improved</param>
         public void PowerUp_FireRate(float amount)
         {
             fireRate -= amount;
@@ -63,6 +81,9 @@ namespace Mini_Vampire_Surviours.Gameplay.WeaponSystem
                 fireRate = 0.25f;
         }
 
+        /// <summary>
+        /// Will be fired when player select Damage improved powerUp
+        /// </summary>
         public void PowerUp_PrimaryWeaponDamage(float damage)
         {
             this.damage += damage;

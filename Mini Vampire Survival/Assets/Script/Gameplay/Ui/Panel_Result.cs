@@ -23,9 +23,9 @@ namespace Mini_Vampire_Surviours.Gameplay.UISystem
 
         public void Set_Ui()
         {
-            int totalSurvived = StatesSystem.StatesManager.Instance.totalSurvived;
-            int totalKilled  = StatesSystem.StatesManager.Instance.totalKilled;
-            bool isWon = StatesSystem.StatesManager.Instance.IsWon;
+            int totalSurvived = StatesSystem.StatsManager.Instance.totalSurvived;
+            int totalKilled  = StatesSystem.StatsManager.Instance.totalKilled;
+            bool isWon = StatesSystem.StatsManager.Instance.IsWon;
 
             go_WON.SetActive(isWon);
             go_GameOver.SetActive(!isWon);

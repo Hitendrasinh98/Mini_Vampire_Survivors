@@ -4,10 +4,14 @@ using UnityEngine;
 
 namespace Mini_Vampire_Surviours.Gameplay.WeaponSystem
 {
+    /// <summary>
+    /// This is Managing all the Active weapons assigned to player 
+    /// can have one primary weapon and N number of secondary weapon
+    /// </summary>
     public enum WeaponTypeEnum { None ,MagicWand ,FireArm};
     public class WeaponManager : MonoBehaviour
     {
-        [SerializeField] ConfigData.So_WeaponConfig so_WeaponConfig;
+        [SerializeField] ConfigData.So_WeaponConfig so_WeaponConfig;  //List of the Weapons in SO
         [SerializeField] Cinemachine.CinemachineCollisionImpulseSource impulseSource;
 
         [Header("Current Progress")]
@@ -81,6 +85,10 @@ namespace Mini_Vampire_Surviours.Gameplay.WeaponSystem
             }
         }
 
+        /// <summary>
+        /// Adding Primary weapon from list of weapons
+        /// </summary>
+        /// <param name="weaponType"></param>
         void AddPrimaryWeapon(WeaponTypeEnum weaponType)
         {
             Transform primaryWeaponSlot = player.PrimaryWeaponSlot;

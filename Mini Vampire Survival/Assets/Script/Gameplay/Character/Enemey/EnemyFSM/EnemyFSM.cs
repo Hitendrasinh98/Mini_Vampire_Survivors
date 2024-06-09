@@ -5,19 +5,44 @@ using UnityEngine;
 
 namespace Mini_Vampire_Surviours.Gameplay.EnemySystem
 {
+    /// <summary>
+    /// Enemy FSM States to transfer each other state.
+    /// </summary>
     public enum EnemyStateEnum { None, Idle, Chase, Attack ,Died };
+    /// <summary>
+    /// Animator Parameter Key Enum to easily controll animator transiction.
+    /// </summary>
     public enum AnimatorParameterKeyEnum { MoveSpeed, AttackIndex, OnAttack, OnHit, IsDied };
     public enum AnimNameEnum { Locomotion };
+
+    /// <summary>
+    /// Base class for Enemy FSM System 
+    /// controll the enemy states
+    /// </summary>
     public class EnemyFSM : Base_FSM<EnemyFSM,EnemyStateEnum> , IEnemy
     {
         public readonly string ChannelKey = "[EnemyFSM] ";  //will be used to fillter logs 
         
+        /// <summary>
+        /// This is where the Enemy Config data is stored 
+        /// healht , movespeed , attack range , etc...
+        /// </summary>
         [Space(10)]
         [SerializeField] ConfigData.So_EnemyConfig so_EnemyConfig;
         [field: SerializeField] public Enemy enemy { get; private set; }
+        /// <summary>
+        /// Used to spawn the gems that need to be spawn with correct amount and count
+        /// </summary>
         [field: SerializeField] public ConfigData.XPGemTypeEnum gemTypeEnum { get; private set; }
+        
+        /// <summary>
+        /// Helath Componnet to controll the Helath of this enemy entity
+        /// </summary>
         [field: SerializeField] public Health m_Health { get; private set; }
-        [field: SerializeField] public Movement m_Movement { get; private set; }
+        /// <summary>
+        /// Movement Componnet to controll the movement of this enemy entity
+        /// </summary>
+        [field: SerializeField] public Movement m_Movement { get; private set; }  
 
 
 
@@ -103,7 +128,9 @@ namespace Mini_Vampire_Surviours.Gameplay.EnemySystem
 
 
         
-
+        /// <summary>
+        /// When health component raise event then we cahnge state to Die 
+        /// </summary>
         void OnDied()
         {
             ChangeState(EnemyStateEnum.Died);

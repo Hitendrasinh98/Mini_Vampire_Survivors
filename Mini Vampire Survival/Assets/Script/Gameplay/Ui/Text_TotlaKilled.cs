@@ -12,11 +12,11 @@ namespace Mini_Vampire_Surviours.Gameplay.UISystem
         private void Awake()
         {
             OnTotalKilledIncrease(0);
-            StatesSystem.StatesManager.Instance.AddObserver_OnTotalKilledIncrease(OnTotalKilledIncrease);
+            StatesSystem.StatsManager.Instance.AddObserver_OnTotalKilledIncrease(OnTotalKilledIncrease);
         }
         private void OnDestroy()
         {
-            StatesSystem.StatesManager.Instance.RemoveObserver_OnTotalKilledIncrease(OnTotalKilledIncrease);
+            StatesSystem.StatsManager.Instance.RemoveObserver_OnTotalKilledIncrease(OnTotalKilledIncrease);
         }
 
         void OnTotalKilledIncrease(int totalKilled)

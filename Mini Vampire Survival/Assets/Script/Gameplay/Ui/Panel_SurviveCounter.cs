@@ -15,14 +15,14 @@ namespace Mini_Vampire_Surviours.Gameplay.UISystem
         {
             txt_Survived.gameObject.SetActive(false);
             Core.EventManager.Instance.AddObserver_OnGameStart(OnGameStart);
-            StatesSystem.StatesManager.Instance.AddObserver_OnSurviveTimeIncrease(Update_TotalSurviveUi);    
+            StatesSystem.StatsManager.Instance.AddObserver_OnSurviveTimeIncrease(Update_TotalSurviveUi);    
         }
 
 
         private void OnDestroy()
         {
             Core.EventManager.Instance.RemoveObserver_OnGameStart(OnGameStart);
-            StatesSystem.StatesManager.Instance.RemoveObserver_OnSurviveTimeIncrease(Update_TotalSurviveUi);
+            StatesSystem.StatsManager.Instance.RemoveObserver_OnSurviveTimeIncrease(Update_TotalSurviveUi);
         }
         void OnGameStart(Core.EventManager.GameStartData gameStartData)
         {

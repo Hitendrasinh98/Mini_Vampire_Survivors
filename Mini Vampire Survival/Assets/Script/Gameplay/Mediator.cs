@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace Mini_Vampire_Surviours.Gameplay
 {
+    /// <summary>
+    /// This is a Mediator for all the systems communication    
+    /// </summary>
     [DefaultExecutionOrder(-1)]
     public class Mediator : MonoBehaviour
     {

@@ -10,7 +10,15 @@ namespace Mini_Vampire_Surviours.Gameplay.WeaponSystem
         float FireRate { get; }
         void Shoot();
 
+        /// <summary>
+        /// Called when player select power of Firerate improved
+        /// </summary>
+        /// <param name="amount"></param>
         void PowerUp_FireRate(float amount);
+        /// <summary>
+        /// Called when player select power of Weapon Damage increase
+        /// </summary>
+        /// <param name="damage"></param>
         void PowerUp_PrimaryWeaponDamage(float damage);
         
 

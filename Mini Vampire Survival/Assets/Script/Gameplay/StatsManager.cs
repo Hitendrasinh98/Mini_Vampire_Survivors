@@ -4,11 +4,15 @@ using UnityEngine;
 
 namespace Mini_Vampire_Surviours.Gameplay.StatesSystem
 {
+    /// <summary>
+    /// This is where all game's stats are stored
+    /// </summary>
+    /// 
     [DefaultExecutionOrder(-1)]
-    public class StatesManager : MonoBehaviour
+    public class StatsManager : MonoBehaviour
     {
-        static StatesManager instance;
-        public static StatesManager Instance=>instance;
+        static StatsManager instance;
+        public static StatsManager Instance=>instance;
 
         [field: SerializeField] public int totalSurvived { get; private set; }
         [field: SerializeField] public int totalKilled{ get; private set; }

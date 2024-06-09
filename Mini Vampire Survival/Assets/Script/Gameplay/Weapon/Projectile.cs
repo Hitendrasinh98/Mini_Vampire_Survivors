@@ -4,6 +4,10 @@ using UnityEngine;
 
 namespace Mini_Vampire_Surviours.Gameplay.WeaponSystem
 {
+    /// <summary>
+    /// This is projectile controller for weapon shoot's
+    /// hanle collision and do some damage 
+    /// </summary>
     public class Projectile : MonoBehaviour
     {
         public GameObject muzzlePrefab;
@@ -18,6 +22,13 @@ namespace Mini_Vampire_Surviours.Gameplay.WeaponSystem
         Vector3 targetPos;
         Vector2 direction;
 
+        /// <summary>
+        /// Will Set the pojectile with their data
+        /// </summary>
+        /// <param name="damage"></param>
+        /// <param name="Range"></param>
+        /// <param name="speed"></param>
+        /// <param name="direction"></param>
         public void Init(float damage, float Range , float speed , Vector3 direction)
         {
             this.speed = speed;
@@ -38,6 +49,7 @@ namespace Mini_Vampire_Surviours.Gameplay.WeaponSystem
             transform.position = Vector2.Lerp(transform.position,targetPos, (speed * Time.deltaTime));
         }
 
+        
         void Spawn_Muzzle()
         {
             if (muzzlePrefab != null)
@@ -62,7 +74,9 @@ namespace Mini_Vampire_Surviours.Gameplay.WeaponSystem
             {
                 collision.gameObject.GetComponent<Core.IDamagable>().TakeDamage(Damage);
             }
-            OnCollide(collision.contacts[0]);
+
+            ContactPoint2D firstContactPoint = collision.contacts[0];
+            OnCollide(firstContactPoint);
             Destroy(gameObject);
         }
 

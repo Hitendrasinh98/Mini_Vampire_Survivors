@@ -18,7 +18,13 @@ namespace Mini_Vampire_Surviours.Gameplay.PlayerSystem
     {
         static readonly string ChannelKey = "[PlayerFsM] ";  //will be used to fillter logs 
         [field: SerializeField,Space(10)] public Player player { get; private set; }
+        /// <summary>
+        /// Health Component where health realted funtionality handles
+        /// </summary>
         [field: SerializeField] public Health m_Health { get; private set; }
+        /// <summary>
+        /// Movemtn Component witch is used to move this player 
+        /// </summary>
         [field: SerializeField] public Movement m_Movement { get; private set; }
         
 
@@ -64,17 +70,29 @@ namespace Mini_Vampire_Surviours.Gameplay.PlayerSystem
             activeState.GameLateUpdate();
         }
 
-
+        /// <summary>
+        /// Raised when Game Start with starting Config data
+        /// </summary>
+        /// <param name="gameStartData"></param>
         void OnGameStart(EventManager.GameStartData gameStartData)
         {
             Initialize(gameStartData.MaxHealth, gameStartData.MoveSpeed);
             ChangeState(PlayerStateEnum.Idle);
         }
 
+        /// <summary>
+        /// Raised when game complete event is raised
+        /// </summary>
         void OnGameComplete()
         {
             ChangeState(PlayerStateEnum.None);
         }
+
+        /// <summary>
+        /// Called when the PowerSelect is fired
+        /// </summary>
+        /// <param name="powerUpType"></param>
+        /// <param name="amount"></param>
         void OnPowerSelect(ConfigData.LevelUPPowerEnum powerUpType , float amount)
         {
             if(powerUpType == ConfigData.LevelUPPowerEnum.Health)
@@ -86,7 +104,11 @@ namespace Mini_Vampire_Surviours.Gameplay.PlayerSystem
             }
         }
 
-
+        /// <summary>
+        /// Inititalized of health and mvoemetn of this player 
+        /// </summary>
+        /// <param name="maxHealth"></param>
+        /// <param name="moveSpeed"></param>
         void Initialize(int maxHealth , float moveSpeed)
         {
             m_Health.Init(maxHealth);

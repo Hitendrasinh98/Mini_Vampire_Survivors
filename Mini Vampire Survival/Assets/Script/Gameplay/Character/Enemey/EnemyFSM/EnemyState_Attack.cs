@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 namespace Mini_Vampire_Surviours.Gameplay.EnemySystem
 {
+    /// <summary>
+    /// Enemy State to define behaviour for attack
+    /// </summary>
     public class EnemyState_Attack : Core.State<EnemyFSM, EnemyStateEnum>
     {
         float AttackRate;

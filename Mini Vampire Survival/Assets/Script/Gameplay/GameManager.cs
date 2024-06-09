@@ -4,6 +4,10 @@ using UnityEngine;
 
 namespace Mini_Vampire_Surviours.Gameplay
 {
+    /// <summary>
+    /// This is GameManager Class for handling Game Flow
+    /// Game Start to Game End all flow will go through from here
+    /// </summary>
     public class GameManager : MonoBehaviour
     {
         [SerializeField] ConfigData.SO_PlayerConfig soPlayerConfig;
@@ -30,17 +34,17 @@ namespace Mini_Vampire_Surviours.Gameplay
 
             UISystem.UIManager.Instance.ShowPage(UISystem.UIPageIDEnum.GameHud);
             Core.EventManager.Instance.OnGameStart?.Invoke(gameStartData);
-            StatesSystem.StatesManager.Instance.AddObserver_OnSurviveTimeIncrease(OnSurvieTimeIncrease);
+            StatesSystem.StatsManager.Instance.AddObserver_OnSurviveTimeIncrease(OnSurvieTimeIncrease);
         }
 
         private void OnDestroy()
         {
-            StatesSystem.StatesManager.Instance.RemoveObserver_OnSurviveTimeIncrease(OnSurvieTimeIncrease);
+            StatesSystem.StatsManager.Instance.RemoveObserver_OnSurviveTimeIncrease(OnSurvieTimeIncrease);
         }
 
         public void OnPlayerDied()
         {
-            StatesSystem.StatesManager.Instance.Set_ResultStatus(false);
+            StatesSystem.StatsManager.Instance.Set_ResultStatus(false);
             Core.EventManager.Instance.OnGameComeplete?.Invoke();
             UISystem.UIManager.Instance.HidePage(UISystem.UIPageIDEnum.GameHud);
             UISystem.UIManager.Instance.ShowPage(UISystem.UIPageIDEnum.Result);
@@ -50,7 +54,7 @@ namespace Mini_Vampire_Surviours.Gameplay
         {
             if(totalSeconds >= soPlayerConfig.targetSurviveTime)
             {
-                StatesSystem.StatesManager.Instance.Set_ResultStatus( true);
+                StatesSystem.StatsManager.Instance.Set_ResultStatus( true);
                 Core.EventManager.Instance.OnGameComeplete?.Invoke();
                 UISystem.UIManager.Instance.HidePage(UISystem.UIPageIDEnum.GameHud);
                 UISystem.UIManager.Instance.ShowPage(UISystem.UIPageIDEnum.Result);

@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 namespace Mini_Vampire_Surviours.Gameplay.EnemySystem
 {
+    /// <summary>
+    /// This is representing  enemyies chase behaviour
+    /// when ever enemy need to chase player or target object.
+    /// </summary>
     public class EnemyState_Chase : Core.State<EnemyFSM, EnemyStateEnum>
     {
         Vector2 direction;
